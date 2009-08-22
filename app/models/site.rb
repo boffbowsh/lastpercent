@@ -2,6 +2,7 @@ class Site < ActiveRecord::Base
   # Associations
   belongs_to :user
   has_many :assets
+  has_many :results, :through => :assets
 
   # Validations
   validates_presence_of :url
