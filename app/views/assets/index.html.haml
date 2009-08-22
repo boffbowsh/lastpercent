@@ -1,4 +1,9 @@
 %h2 Assets
 
-%ul= render @assets
+- form_tag search_site_assets_path, :method => :get do
+  = text_field_tag :query
+  = submit_tag 'Search'
+
+%ul= render :partial => 'asset', :collection =>  @assets
 = will_paginate @assets
+

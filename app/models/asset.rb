@@ -45,4 +45,12 @@ class Asset < ActiveRecord::Base
   def internal
     !external?
   end
+
+  define_index do
+    # fields
+    indexes :url
+
+    # attributes
+    has :created_at, :external, :response_status, :response_time
+  end
 end

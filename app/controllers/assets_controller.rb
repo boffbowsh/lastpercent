@@ -13,6 +13,11 @@ class AssetsController < ApplicationController
     end
   end
 
+  def search
+    @assets = Asset.search "*#{params[:query]}*"
+    render :index
+  end
+
   private
 
   def current_objects

@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :sites, :shallow => true do |site|
-    site.resources :assets, :except => [:edit, :update] do |asset|
+    site.resources :assets, :except => [:edit, :update], :collection => { :search => :get } do |asset|
       asset.resources :results, :only => [:index, :show]
     end
     site.resources :results, :only => [:index]

@@ -10,3 +10,5 @@ public/stylesheets/*.css
 tmp/restart.txt
 coverage/
 coverage.data
+config/*.sphinx.conf
+db/sphinx/*

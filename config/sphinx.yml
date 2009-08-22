@@ -1,0 +1,25 @@
+development:
+  max_matches: 200
+  enable_star: 1
+  min_infix_len: 3
+  sql_range_step: 10000000
+  bin_path: '/usr/local/bin'
+  port: 3312
+production:
+  max_matches: 200
+  enable_star: 1
+  min_infix_len: 3
+  sql_range_step: 10000000
+  port: 3313
+staging:
+  max_matches: 200
+  enable_star: 1
+  min_infix_len: 3
+  sql_range_step: 10000000
+  port: 3312
+test:
+  max_matches: 200
+  enable_star: 1
+  min_infix_len: 3
+  sql_range_step: 10000000
+  port: 3313
