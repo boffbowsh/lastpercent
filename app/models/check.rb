@@ -21,7 +21,13 @@ class Check < ActiveRecord::Base
   belongs_to :state
   
   has_many :results
-
+  
+  after_create :enqueue
+  
+  def enqueue
+    Delayed::Job.enqueue self
+  end
+  
   def perform
     self.started_at = Time.now
     begin!
