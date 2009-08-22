@@ -21,7 +21,7 @@ class Asset < ActiveRecord::Base
   after_update :enqueue
 
   def enqueue
-    Delayed::Job.enqueue self unless mime_type.blank?
+    Delayed::Job.enqueue self unless content_type_id.nil?
   end
 
   def create_checks
