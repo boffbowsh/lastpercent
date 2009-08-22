@@ -7,10 +7,11 @@ daemon_options = {
   :multiple   => false,
   :dir_mode   => :normal,
   :dir        => File.join(dir, 'tmp', 'pids'),
-  :backtrace  => true
+  :backtrace  => true,
+  :log_output => true
 }
 
-if ARGV[1].empty?
+if ARGV[1].nil?
   puts "Must supply a worker name, i.e. 'moe'"
   exit 1
 else
