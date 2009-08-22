@@ -14,6 +14,9 @@ http://github.com/mislav/will_paginate
 http://github.com/thoughtbot/shoulda
 http://github.com/thoughtbot/factory_girl
 http://metric-fu.rubyforge.org/
+http://rubyforge.org/projects/ruby-openid
+http://github.com/binarylogic/authlogic_openid
+http://github.com/chrislloyd/gravtastic
 
 Plugins:
 http://github.com/hcatlin/make_resourceful
@@ -21,9 +24,14 @@ http://github.com/technoweenie/permalink_fu
 http://github.com/thoughtbot/hoptoad_notifier
 http://github.com/rails/country_select
 http://github.com/neilchandler/anemone
+http://github.com/ioptics/clever_form_builder
+http://github.com/thoughtbot/high_voltage
 
 Javascripts:
 http://jqueryjs.googlecode.com
 
 Sass:
 http://gist.github.com/130941.txt
+
+Basic User System:
+http://github.com/andrew/bumble

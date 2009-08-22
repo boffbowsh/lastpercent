@@ -1,0 +1,14 @@
+<div id="<%= div_id %>" class="<%= div_class %>">
+  
+  <div class="label">
+    <%= label %>
+  </div>
+  
+  <div class="input">
+    <%= element %>
+  </div>
+  
+  <%= content_tag :p, description, :class => 'description' unless description.blank? %>
+  <%= content_tag :p, help, :class => 'help' unless help.blank? %>
+  <%= content_tag :p, error, :class => 'error' unless error.blank? %>
+</div>

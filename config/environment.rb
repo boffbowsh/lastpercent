@@ -14,7 +14,11 @@ Rails::Initializer.run do |config|
   config.gem 'newrelic_rpm'
   config.gem 'authlogic'
   config.gem 'haml'
-  config.gem 'will_paginate'
+  config.gem 'mislav-will_paginate', :lib => 'will_paginate', :source => 'http://gems.github.com'
+  config.gem "authlogic-oid", :lib => "authlogic_openid"
+  config.gem "ruby-openid", :lib => "openid"
+  config.gem 'gravtastic',                      :version => '>=2.1.3'
+
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
   # -- all .rb files in that directory are automatically loaded.
