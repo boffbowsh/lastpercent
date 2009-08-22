@@ -14,15 +14,20 @@ class Site < ActiveRecord::Base
   def to_s
     name.blank? ? url : name
   end
-
-  after_create :spider
-
+  
+  after_create :enqueue
+  
+  def enqueue
+    Delayed::Job.enqueue self
+  end
+  
+  alias :perform :spider
   def spider
     anemone = Anemone.crawl(url) do |core|
       core.on_every_page do |page|
 
         asset = assets.find_or_create_by_url(page.url.to_s)
-        asset.update_attributes( :body => page.doc.to_s, :responce_status => page.code, :external => page.external )
+        asset.update_attributes( :body => page.doc.to_s, :response_status => page.code, :external => page.external )
         page.links.each do |link|
           child_asset = assets.find_or_create_by_url( link.to_s )
           asset.links << child_asset unless asset.links.include?( child_asset )
