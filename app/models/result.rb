@@ -7,4 +7,8 @@ class Result < ActiveRecord::Base
   # Validations
   validates_presence_of :check_id
   validates_presence_of :asset_id
+
+  def to_s
+    message.body
+  end
 end
