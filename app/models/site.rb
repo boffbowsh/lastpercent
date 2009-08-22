@@ -15,7 +15,11 @@ class Site < ActiveRecord::Base
     name.blank? ? url : name
   end
 
-  after_create :spider
+  after_create :perform
+
+  def perform
+    send_later 'spider'
+  end
 
   def spider
     anemone = Anemone.crawl(url) do |core|
