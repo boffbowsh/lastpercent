@@ -20,6 +20,8 @@ Rails::Initializer.run do |config|
   config.gem 'gravtastic',                      :version => '>=2.1.3'
   config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
   config.gem 'w3c_validators', :version => '>=0.9.3'
+  config.gem 'mechanize', :version => '>=0.9.3'
+  config.gem 'raakt', :version => '>=0.5.5'
 
   # Worker-specifc
   config.gem 'daemons'
