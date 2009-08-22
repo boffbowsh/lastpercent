@@ -5,7 +5,6 @@ class LastPercentValidator::HTML < LastPercentValidator::Base
     
   def run
     validator = MarkupValidator.new
-    puts "working on: #{@asset.url}"
     #results = @validator.validate_file(fp)
     results = validator.validate_uri(@asset.url)
 
