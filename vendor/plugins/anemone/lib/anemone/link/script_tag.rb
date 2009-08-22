@@ -1,5 +1,5 @@
 module Anemone
-  class LinkTag < Link
+  class ScriptTag < Link
 
     class <<self
       def find_links_in(page)
