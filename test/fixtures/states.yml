@@ -1,0 +1,23 @@
+worker-disabled:
+  name: disabled
+  type: Worker
+
+worker-enabled:
+  name: enabled
+  type: Worker
+  
+check-pending:
+  name: pending
+  type: Check
+
+check-running:
+  name: running
+  type: Check
+
+check-completed:
+  name: completed
+  type: Check
+
+check-failed:
+  name: failed
+  type: Check
