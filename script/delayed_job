@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+require 'daemons'
+dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
+
+daemon_options = {
+  :multiple   => false,
+  :dir_mode   => :normal,
+  :dir        => File.join(dir, 'tmp', 'pids'),
+  :backtrace  => true
+}
+
+if ARGV[1].empty?
+  puts "Must supply a worker name, i.e. 'moe'"
+  exit 1
+else
+  WORKER_NAME = ARGV[1]
+end
+
+Daemons.run_proc("LastPercentWorker-#{WORKER_NAME}", daemon_options) do
+  if ARGV.include?('--')
+    ARGV.slice! 0..ARGV.index('--')
+  else
+    ARGV.clear
+  end
+  
+  Dir.chdir dir
+  RAILS_ENV = ARGV.first || ENV['RAILS_ENV'] || 'development'
+  require File.join('config', 'environment')
+
+  Delayed::Job.worker_name = WORKER_NAME
+  Delayed::Worker.new.start
+end
