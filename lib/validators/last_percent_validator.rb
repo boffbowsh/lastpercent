@@ -28,7 +28,7 @@ module LastPercentValidator
         res = ::Result.new
         res.check_id = @check.id
         res.asset_id = @asset.id
-        res.message = ::Message.find_or_create_by(:validator_id => @validator.id, :body => result[:body])
+        res.message = ::Message.find_or_create_by_body_and_validator_id(result[:body], @validator.id)
         res.severity = result[:severity]
         res.line_no = result[:line_no]
         res.column_no = result[:column_no]

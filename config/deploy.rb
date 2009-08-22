@@ -30,6 +30,7 @@ depend :remote, :gem, 'newrelic_rpm',                     ">0"
 depend :remote, :gem, 'authlogic',                        ">0"
 depend :remote, :gem, 'haml',                             ">0"
 depend :remote, :gem, 'mislav-will_paginate',             ">0"
+depend :remote, :gem, 'w3c_validators',                   ">0"
 
 set :local_shared_files, %w(config/database.yml db/sphinx)
 

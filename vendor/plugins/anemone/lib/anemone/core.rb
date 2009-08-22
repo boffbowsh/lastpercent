@@ -13,7 +13,11 @@ module Anemone
     # and optional *block*
     #
     def initialize(urls, &block)
-      @urls = [urls].flatten.map{ |url| URI(url) if url.is_a?(String) }
+      @urls = [urls].flatten.map do |url| 
+        url = URI(url) if url.is_a?(String) 
+        # Make sure the initial string urls passed to Anemone have external flag set
+        url.external = false if url.external.nil?
+        url      end
       @urls.each{ |url| url.path = '/' if url.path.empty? }
       
       @tentacles = []
@@ -119,7 +123,9 @@ module Anemone
         page.doc = nil if Anemone.options.discard_page_bodies
         
         links_to_follow(page).each do |link|
-          link_queue.enq(link)
+          # TODO : Add support for https links
+          # Only follow http links
+          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s )
           @pages[link] = nil
         end
 
