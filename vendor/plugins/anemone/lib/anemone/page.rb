@@ -27,6 +27,10 @@ module Anemone
     attr_accessor :depth
     # Flag page as external
     attr_accessor :external
+    # MediumInt used to hold the size of the asset in bytes
+    attr_accessor :content_length
+    # Integer used to hold the response time in fetching the asset from the given url
+    attr_accessor :response_time
     
     #
     # Create a new Page from the response of an HTTP request to *url*
@@ -35,17 +39,22 @@ module Anemone
       begin
         url = URI(url) if url.is_a?(String)
         
-        response, code, location = Anemone::HTTP.get(url)
-
+        response = nil
+        code = nil
+        location = nil
+        response_time = 100 * Benchmark.realtime do
+          response, code, location = Anemone::HTTP.get(url)
+        end
+              
         aka = nil
         if !url.eql?(location)
           aka = location
         end
         
         if url.is_external?
-          return Page.new(url, nil, code, response.to_hash, aka)
+          return Page.new(url, nil, code, response.to_hash, aka, response_time)
         else
-          return Page.new(url, response.body, code, response.to_hash, aka)
+          return Page.new(url, response.body, code, response.to_hash, aka, response_time)
         end
       rescue
         return Page.new(url)
@@ -55,7 +64,7 @@ module Anemone
     #
     # Create a new page
     #
-    def initialize(url, body = nil, code = nil, headers = nil, aka = nil)
+    def initialize(url, body = nil, code = nil, headers = nil, aka = nil, response_time = nil)
       @url = url
       @code = code
       @headers = headers
@@ -63,7 +72,9 @@ module Anemone
       @aliases = []
       @data = OpenStruct.new
       @external = url.is_external?
-	  
+      @content_length = headers['content-length'].first if headers && headers['content-length']
+      @response_time = response_time
+      	  
       @aliases << aka if !aka.nil?
 
       if body
@@ -79,8 +90,8 @@ module Anemone
         
         @links.uniq!
       end
-    rescue
-      puts "An error occured"
+    rescue Exception => exp
+      puts "An error occured [#{exp}]"
     end
     
     

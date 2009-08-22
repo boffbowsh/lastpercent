@@ -17,7 +17,8 @@ module Anemone
         url = URI(url) if url.is_a?(String) 
         # Make sure the initial string urls passed to Anemone have external flag set
         url.external = false if url.external.nil?
-        url      end
+        url
+      end
       @urls.each{ |url| url.path = '/' if url.path.empty? }
       
       @tentacles = []

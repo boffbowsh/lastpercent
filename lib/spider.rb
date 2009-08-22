@@ -9,7 +9,9 @@ class Spider
         asset.update_attributes( :body => page.doc.to_s,
                                  :response_status => page.code,
                                  :external => page.external, 
-                                 :content_type_id => content_type.id )
+                                 :content_type_id => content_type.id,
+                                 :content_length => page.content_length,
+                                 :response_time => page.response_time )
 
         page.links.each do |link|
           child_asset = site.assets.find_or_create_by_url( link.to_s )
