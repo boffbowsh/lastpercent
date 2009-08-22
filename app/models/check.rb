@@ -1,4 +1,5 @@
 require 'benchmark'
+require 'aasm'
 
 class Check < ActiveRecord::Base
   include AASM
@@ -27,21 +28,20 @@ class Check < ActiveRecord::Base
     
     validator_object = validator.validator_class.new self
     
+    validator_results = nil
     realtime = Benchmark.realtime do
-      validator_results = validator_object.run
+      validator_object.run
     end
     
-    validator_results.each do |validator_result|
-      results.create validator_result
+    validator_object.results.each do |validator_result|
+      result = results.build
+      result.attributes = validator_result
+      result.save
     end
     
-    self.duration = realtime
+    self.duration = realtime * 1000
     self.worker = Worker.find_by_name!(Delayed::Job.worker_name)
     save!
-    completed!
-  end
-  
-  def fail
-    fail!
+    complete!
   end
 end

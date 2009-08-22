@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'daemons'
+
 dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 daemon_options = {
@@ -28,6 +29,10 @@ Daemons.run_proc("LastPercentWorker-#{WORKER_NAME}", daemon_options) do
   Dir.chdir dir
   RAILS_ENV = ARGV.first || ENV['RAILS_ENV'] || 'development'
   require File.join(dir, 'config', 'environment')
+
+  # Grrrrrrr
+  require 'aasm'
+  require 'anemone'
 
   Delayed::Job.worker_name = WORKER_NAME
   Delayed::Worker.new.start

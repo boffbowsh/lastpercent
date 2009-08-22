@@ -75,7 +75,7 @@ module Delayed
         logger.info "* [JOB] PERMANENTLY removing #{self.name} because of #{attempts} consequetive failures."
         destroy_failed_jobs ? destroy : update_attribute(:failed_at, Time.now)
         # Also let the payload know if the job has been cancelled
-        payload_object.fail rescue nil
+        payload_object.fail! rescue nil
       end
     end
 
