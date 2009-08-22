@@ -9,7 +9,7 @@ class Result < ActiveRecord::Base
   validates_presence_of :asset_id
 
   delegate :body, :to => :message
-  delegate :validator_id, :to => :check
+  delegate :validator_id, :validator, :to => :check
 
   before_validation_on_create :set_asset_id
 

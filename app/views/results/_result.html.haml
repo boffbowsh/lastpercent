@@ -1,2 +1,15 @@
 %li[result]
-  = link_to result, result
+  %h3
+    = link_to result.validator.name, result
+    for
+    = link_to result.asset, result.asset
+  %p
+    = result.message
+    - if result.line_no.present? && result.column_no.present?
+      %strong
+        [
+        Line:
+        = result.line_no
+        Col:
+        = result.column_no
+        ]

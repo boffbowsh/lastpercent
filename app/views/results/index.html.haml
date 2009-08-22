@@ -1,3 +1,6 @@
-%h2 Results
+%h2
+  = link_to parent_object, parent_object
+  Results
 
 %ul= render @results
+= will_paginate @results
