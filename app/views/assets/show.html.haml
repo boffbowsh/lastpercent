@@ -1,1 +1,6 @@
-%h2= @asset
+%h2
+  = @asset
+  = link_to "&#x2192;", @asset.url, :rel => :external
+
+%pre
+  = h @asset.body
