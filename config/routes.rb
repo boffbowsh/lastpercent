@@ -1,4 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
+  map.namespace :admin do |admin|
+    admin.resources :workers
+  end
+
   map.resources :sites, :shallow => true do |site|
     site.resources :assets, :except => [:edit, :update] do |asset|
       asset.resources :results, :only => [:index, :show]
