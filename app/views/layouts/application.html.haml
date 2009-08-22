@@ -19,6 +19,7 @@
   %body
     #header
       %h1= link_to 'Last Percent', root_path, :rel => :home
+      %p= current_user
     #content
       - flash.each do |key, msg|
         .flash{:id => key}= msg
