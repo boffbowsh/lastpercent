@@ -1,2 +1,3 @@
 %li[site]
   = link_to site, site
+  = link_to pluralize(site.assets.count, 'asset'), site_assets_path(site)
