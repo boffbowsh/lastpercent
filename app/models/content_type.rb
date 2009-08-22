@@ -9,6 +9,10 @@ class ContentType < ActiveRecord::Base
   before_save :sanitize
 
   def sanitize
-    self.mime_type = self.mime_type.split(';').first
+    self.mime_type = ContentType.sanitize self.mime_type
+  end
+
+  def self.sanitize(dirty_mime_type)
+    dirty_mime_type.split(';').first
   end
 end

@@ -4,7 +4,7 @@ class Spider
       core.on_every_page do |page|
         asset = site.assets.find_or_create_by_url( page.url.to_s )
 
-        content_type = ContentType.find_or_create_by_mime_type( page.content_type )
+        content_type = ContentType.find_or_create_by_mime_type( ContentType.sanitize page.content_type )
 
         asset.update_attributes( :body => page.doc.to_s,
                                  :responce_status => page.code,
