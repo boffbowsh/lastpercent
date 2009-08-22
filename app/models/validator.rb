@@ -12,4 +12,6 @@ class Validator < ActiveRecord::Base
   validates_inclusion_of :active, :in => [true, false]
   validates_presence_of :permalink
   validates_uniqueness_of :permalink
+
+  named_scope :active, :conditions => {:active => true}
 end
