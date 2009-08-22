@@ -16,5 +16,5 @@ ActionController::Routing::Routes.draw do |map|
   map.activate  '/activate/:activation_code', :controller => 'users', :action => 'activate'
 
   map.resources :pages, :only => :show
-  map.root      :controller => "users"
+  map.root      :controller => "pages", :action => 'index'
 end
