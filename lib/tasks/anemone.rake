@@ -4,7 +4,7 @@ task :anemone => :environment do
     core.on_every_page do |page|
 
       asset = Asset.find_or_create_by_url(page.url.to_s)
-      asset.update_attributes( :body => page.doc.to_s, :responce_status => page.code )
+      asset.update_attributes( :body => page.doc.to_s, :responce_status => page.code, :external => page.external )
       page.links.each do |link|
         child_asset = Asset.find_or_create_by_url( link.to_s )
         asset.links << child_asset unless asset.links.include?( child_asset )
