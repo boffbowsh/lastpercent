@@ -14,6 +14,9 @@ http://github.com/mislav/will_paginate
 http://github.com/thoughtbot/shoulda
 http://github.com/thoughtbot/factory_girl
 http://metric-fu.rubyforge.org/
+http://rubyforge.org/projects/ruby-openid
+http://github.com/binarylogic/authlogic_openid
+http://github.com/chrislloyd/gravtastic
 
 Plugins:
 http://github.com/hcatlin/make_resourceful

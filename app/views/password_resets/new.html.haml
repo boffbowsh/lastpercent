@@ -1,0 +1,7 @@
+%h2 Change My Password
+
+- clever_form_for User.new, :url => password_resets_path, :method => :put do |f|
+  = f.password_field :password
+  = f.password_field :password_confirmation
+
+  = f.submit "Update my password"
