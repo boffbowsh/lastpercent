@@ -5,6 +5,8 @@ class Asset < ActiveRecord::Base
   has_many :checks
   has_many :results
 
+  delegate :validators, :to => :content_type
+
   has_and_belongs_to_many :links, 
                           :class_name => "Asset",
                           :join_table => "links", 
