@@ -5,8 +5,10 @@ class ContentType < ActiveRecord::Base
   # Validations
   validates_presence_of :mime_type
   validates_uniqueness_of :mime_type
-  
-  def self.sanitize( dirty_mime_type )
-    dirty_mime_type.split(';')[0] 
+
+  before_save :sanitize
+
+  def sanitize
+    self.mime_type = self.mime_type.split(';').first
   end
 end
