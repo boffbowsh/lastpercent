@@ -1,0 +1,6 @@
+%h2
+  New Asset
+
+- clever_form_for [@site, @asset] do |form|
+  = render :partial => 'form', :locals => {:form => form}
+  = form.submit

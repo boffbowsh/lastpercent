@@ -17,6 +17,8 @@ class User < ActiveRecord::Base
 
   validates_presence_of :first_name
 
+  has_many :sites
+
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
     self.first_name = registration["nickname"] if username.blank?

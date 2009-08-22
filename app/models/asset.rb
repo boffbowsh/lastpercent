@@ -1,5 +1,5 @@
 class Asset < ActiveRecord::Base
-    
+  has_many :results
   has_and_belongs_to_many :links, 
                           :class_name => "Asset",
                           :join_table => "links", 
@@ -8,5 +8,7 @@ class Asset < ActiveRecord::Base
                           
   validates_uniqueness_of :url
   
-  
+  def to_s
+    url
+  end
 end

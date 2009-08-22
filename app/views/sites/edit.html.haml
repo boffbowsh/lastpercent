@@ -1,0 +1,7 @@
+%h2
+  Editing
+  = @site
+
+- clever_form_for @site do |form|
+  = render :partial => 'form', :locals => {:form => form}
+  = form.submit
