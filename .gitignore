@@ -15,4 +15,4 @@ db/sphinx/*
 *.sassc
 config/*.sphinx.conf
 db/sphinx/*
-
+cached_assets/**/*

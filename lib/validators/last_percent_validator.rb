@@ -19,7 +19,7 @@ module LastPercentValidator
     rescue
       raise "FATAL ERROR FATAL: Check/Validator data did not load correctly"
     end
-
+    
     def run
       raise "YOU NEED TO OVERRIDE ME"
     end
