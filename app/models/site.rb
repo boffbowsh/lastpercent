@@ -8,7 +8,7 @@ class Site < ActiveRecord::Base
   validates_format_of :url, :with => URI::regexp(%w(http https))
   validates_presence_of :user_id
   validates_associated :user
-  validates_presence_of :verification_token
+  # validates_presence_of :verification_token
 
   def to_s
     url
