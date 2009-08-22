@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
-    c.openid_required_fields = [:email]
+    c.openid_required_fields = [:email, :nickname]
+    c.maintain_sessions = false
     def attributes_to_save # :doc:
       attrs_to_save = attributes.clone.delete_if do |k, v|
         [ :persistence_token, :perishable_token, :single_access_token, :login_count,
@@ -21,7 +22,7 @@ class User < ActiveRecord::Base
 
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
-    self.first_name = registration["nickname"] if username.blank?
+    self.first_name = registration["nickname"] if first_name.blank?
   end
 
   def to_s

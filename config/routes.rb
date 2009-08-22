@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :password_resets, :except => [:index, :show, :destroy]
   map.resources :users, :except => [:destroy]
 
+  map.signup    '/signup',  :controller => "users", :action => "new"
   map.login     '/login',   :controller => "user_sessions", :action => "new", :conditions => {:method => :get}
   map.logout    '/logout',  :controller => "user_sessions", :action => "destroy"
   map.resource  :user_session, :as => 'login'
