@@ -7,7 +7,7 @@ class Spider
         content_type = ContentType.find_or_create_by_mime_type( ContentType.sanitize page.content_type )
 
         asset.update_attributes( :body => page.doc.to_s,
-                                 :responce_status => page.code,
+                                 :response_status => page.code,
                                  :external => page.external, 
                                  :content_type_id => content_type.id )
 
