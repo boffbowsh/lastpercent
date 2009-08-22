@@ -25,6 +25,8 @@ module Anemone
     attr_accessor :visited
     # Used by PageHash#shortest_paths! to store depth of the page
     attr_accessor :depth
+    # Flag page as external
+    attr_accessor :external
     
     #
     # Create a new Page from the response of an HTTP request to *url*
@@ -32,15 +34,19 @@ module Anemone
     def self.fetch(url)
       begin
         url = URI(url) if url.is_a?(String)
-
+        
         response, code, location = Anemone::HTTP.get(url)
 
         aka = nil
         if !url.eql?(location)
           aka = location
         end
-
-        return Page.new(url, response.body, code, response.to_hash, aka)
+        
+        if url.is_external?
+          return Page.new(url, nil, code, response.to_hash, aka)
+        else
+          return Page.new(url, response.body, code, response.to_hash, aka)
+        end
       rescue
         return Page.new(url)
       end
@@ -56,6 +62,7 @@ module Anemone
       @links = []
       @aliases = []
       @data = OpenStruct.new
+      @external = url.is_external?
 	  
       @aliases << aka if !aka.nil?
 
@@ -68,7 +75,7 @@ module Anemone
 
         return if @doc.nil?
         
-        Link.find_all_links_in(self)
+        Link.find_all_links_in(self) 
         
         @links.uniq!
       end
