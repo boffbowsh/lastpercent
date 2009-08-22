@@ -115,13 +115,14 @@ module Anemone
         
         #perform the on_every_page blocks for this page
         do_page_blocks(page)
-
+        
         page.doc = nil if Anemone.options.discard_page_bodies
         
         links_to_follow(page).each do |link|
           link_queue.enq(link)
           @pages[link] = nil
         end
+
         
         #create an entry in the page hash for each alias of this page,
         #i.e. all the pages that redirected to this page
@@ -133,24 +134,25 @@ module Anemone
         end
         
         # if we are done with the crawl, tell the threads to end
-        if link_queue.empty? and page_queue.empty?
+
+        if link_queue.empty? && page_queue.empty?
           until link_queue.num_waiting == @tentacles.size
             Thread.pass
           end
           
           if page_queue.empty?
-            @tentacles.size.times { |i| link_queue.enq(:END)}
+            @tentacles.size.times { |i| link_queue.enq(:END) }
             break
           end
         end
-        
+    
       end
 
       @tentacles.each { |t| t.join }
 
       do_after_crawl_blocks()
       
-      self
+      # self
     end
     
     private    

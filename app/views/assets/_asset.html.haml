@@ -1,2 +1,4 @@
 %li[asset]
   = link_to asset, asset
+  - if asset.external?
+    (external)

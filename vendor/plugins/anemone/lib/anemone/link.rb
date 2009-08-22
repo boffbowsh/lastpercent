@@ -30,8 +30,11 @@ module Anemone
           rescue
             next
           end
+          
+          # flag the link as external and add it to the link list
+          abs.external = !in_domain?(page, abs)
 
-          page.links << abs if in_domain?(page, abs)
+          page.links << abs
         end
       rescue Exception => exp
         puts exp

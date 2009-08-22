@@ -1,7 +1,7 @@
 class Asset < ActiveRecord::Base
   # Associations
-  belongs_to :site_id
-  belongs_to :content_type_id
+  belongs_to :site
+  belongs_to :content_type
   has_many :checks
   has_many :results
 
@@ -12,7 +12,7 @@ class Asset < ActiveRecord::Base
                           :association_foreign_key => "to_asset_id"
 
   validates_format_of :url, :with => URI::regexp(%w(http https))
-  validates_uniqueness_of [:url, :site_id]
+  validates_uniqueness_of :url, :scope => :site_id
   validates_presence_of :site_id
   validates_presence_of :url
 

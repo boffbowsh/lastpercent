@@ -18,12 +18,10 @@ module Anemone
     def run
       while true do
         link = @link_queue.deq
-        
         break if link == :END
 
         page = Page.fetch(link)
-        
-        @page_queue.enq(page)
+        @page_queue.enq(page) unless page.nil?
 
         sleep Anemone.options.delay
       end
