@@ -13,6 +13,7 @@ class ContentType < ActiveRecord::Base
   end
 
   def self.sanitize(dirty_mime_type)
+    return "" if dirty_mime_type.nil?
     dirty_mime_type.split(';').first
   end
 end
