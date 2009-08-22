@@ -21,12 +21,14 @@ class Asset < ActiveRecord::Base
   after_update :enqueue
 
   def enqueue
-    Delayed::Job.enqueue self unless content_type_id.nil?
+    Delayed::Job.enqueue self
   end
 
   def create_checks
-    validators.active.each do |v|
-      checks.find_or_create_by_validator_id v.id
+    if checkable?
+      validators.active.each do |v|
+        checks.find_or_create_by_validator_id v.id
+      end
     end
   end
 
@@ -34,5 +36,13 @@ class Asset < ActiveRecord::Base
 
   def to_s
     url
+  end
+
+  def checkable?
+    internal && content_type_id.present?
+  end
+
+  def internal
+    !external?
   end
 end
