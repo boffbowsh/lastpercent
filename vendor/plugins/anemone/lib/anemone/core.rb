@@ -13,7 +13,11 @@ module Anemone
     # and optional *block*
     #
     def initialize(urls, &block)
-      @urls = [urls].flatten.map{ |url| URI(url) if url.is_a?(String) }
+      @urls = [urls].flatten.map do |url| 
+        url = URI(url) if url.is_a?(String) 
+        # Make sure the initial string urls passed to Anemone have external flag set
+        url.external = false if url.external.nil?
+        url      end
       @urls.each{ |url| url.path = '/' if url.path.empty? }
       
       @tentacles = []

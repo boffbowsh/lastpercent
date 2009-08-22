@@ -5,16 +5,21 @@ task :anemone => :environment do
     core.on_every_page do |page|
       
       # couldn't get find_and_create_by_ to work with multiple columns so rolled my own. Simples!
-      asset = Asset.find_by_site_id_and_url( site.id, page.url.to_s )
-      asset = Asset.create( :site_id =>  site.id, :url => page.url.to_s ) if asset.nil?
+      asset = site.assets.find_by_url( page.url.to_s )
+      asset = site.assets.create( :url => page.url.to_s ) if asset.nil?
       
+      content_type = ContentType.find_or_create_by_mime_type( page.content_type )
       
-      asset.update_attributes( :body => page.doc.to_s, :responce_status => page.code, :external => page.external )
+      asset.update_attributes( :body => page.doc.to_s, 
+                               :responce_status => page.code, 
+                               :external => page.external, 
+                               :content_type_id => content_type.id )
+                               
       page.links.each do |link|
         
         # couldn't get find_and_create_by_ to work with multiple columns so rolled my own. Simples!
-        child_asset = Asset.find_by_site_id_and_url( site.id, link.to_s )
-        child_asset = Asset.create( :site_id =>  site.id, :url => link.to_s  ) if child_asset.nil?
+        child_asset = site.assets.find_by_url( site.id, link.to_s )
+        child_asset = site.assets.create( :url => link.to_s  ) if child_asset.nil?
 
         asset.links << child_asset unless asset.links.include?( child_asset )
       end
