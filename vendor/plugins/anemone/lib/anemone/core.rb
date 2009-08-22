@@ -119,7 +119,9 @@ module Anemone
         page.doc = nil if Anemone.options.discard_page_bodies
         
         links_to_follow(page).each do |link|
-          link_queue.enq(link)
+          # TODO : Add support for https links
+          # Only follow http links
+          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s )
           @pages[link] = nil
         end
 
