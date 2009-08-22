@@ -11,6 +11,6 @@ class Site < ActiveRecord::Base
   # validates_presence_of :verification_token
 
   def to_s
-    url
+    name.blank? ? url : name
   end
 end
