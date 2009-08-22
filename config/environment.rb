@@ -56,3 +56,4 @@ Rails::Initializer.run do |config|
 end
 
 require 'aasm'
+require 'anemone'

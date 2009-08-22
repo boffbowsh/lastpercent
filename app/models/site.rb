@@ -21,7 +21,6 @@ class Site < ActiveRecord::Base
     Delayed::Job.enqueue self
   end
   
-  alias :perform :spider
   def spider
     anemone = Anemone.crawl(url) do |core|
       core.on_every_page do |page|
@@ -35,4 +34,6 @@ class Site < ActiveRecord::Base
       end
     end
   end
+  
+  alias :perform :spider
 end
