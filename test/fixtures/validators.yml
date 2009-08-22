@@ -1,0 +1,39 @@
+html:
+  id: 1
+  class_name: LastPercentValidator::HTML
+  active: 1
+  name: HTML validator
+  description: W3C validation of (x)html documents 
+  permalink: html
+  
+css:
+  id: 2
+  class_name: LastPercentValidator::CSS
+  active: 1
+  name: CSS validator
+  description: W3C validation of css documents 
+  permalink: css
+
+feed:
+  id: 3
+  class_name: LastPercentValidator::Feed
+  active: 1
+  name: Feed validator
+  description: W3C validation of atom/rss/xml documents 
+  permalink: feed
+
+accessibility:
+  id: 4
+  class_name: LastPercentValidator::Accessibility
+  active: 1
+  name: HTML validator
+  description: Check the accessibility of the page
+  permalink: accessibility
+
+Lorem:
+  id: 5
+  class_name: LastPercentValidator::Lorem
+  active: 1
+  name: Lorem Locator
+  description: Find latin filler text in pages
+  permalink: lorem

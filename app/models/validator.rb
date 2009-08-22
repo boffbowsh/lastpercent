@@ -2,6 +2,7 @@ class Validator < ActiveRecord::Base
   # Associations
   has_many :checks
   has_many :results
+  has_and_belongs_to_many :content_types
 
   # Validations
   validates_presence_of :name

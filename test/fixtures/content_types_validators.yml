@@ -1,0 +1,23 @@
+rss1:
+  content_type_id: 3
+  validator_id: 3
+
+rss2:
+  content_type_id: 4
+  validator_id: 3
+
+css:
+  content_type_id: 2
+  validator_id: 2
+
+accessability:
+  content_type_id: 1
+  validator_id: 4
+
+html:
+  content_type_id: 1
+  validator_id: 1
+
+lorem:
+  content_type_id: 1
+  validator_id: 5

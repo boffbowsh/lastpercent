@@ -1,0 +1,15 @@
+html:
+  id: 1
+  mime_type: text/html
+
+css:
+  id: 2
+  mime_type: text/css
+
+atom:
+  id: 3
+  mime_type: application/atom+xml
+
+xml:
+  id: 4
+  mime_type: text/xml
