@@ -1,0 +1,8 @@
+%h2
+  Editing
+  = @user
+
+- clever_form_for @user do |form|
+  = form.error_messages
+  = render :partial => 'form', :locals => {:form => form}
+  = form.submit

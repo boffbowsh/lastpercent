@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{'http-equiv' => 'Content-Type', :content => "text/html; charset=utf-8"}
+    %meta{:name => 'author', :content => 'Rawnet'}
+    %meta{:name => 'keywords', :content => 'keywords TODO'}
+    %meta{:name => 'description', :content => 'description TODO'}
+    - if protect_against_forgery?
+      :javascript
+        var AUTH_TOKEN=#{form_authenticity_token.inspect};
+    = stylesheet_link_tag('application')
+    = stylesheet_link_tag('print', :media => :print)
+    = javascript_include_tag 'jquery', 'application', :cache => true
+    - if iphone?
+      %meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"}
+      = stylesheet_link_tag 'iphone'
+      %link{:rel => "apple-touch-icon", :href => "/images/home-icon.png"}
+    %title Last Percent
+  %body
+    #header
+      %h1= link_to 'Last Percent', root_path, :rel => :home
+    #content
+      - flash.each do |key, msg|
+        .flash{:id => key}= msg
+      = yield
+    #footer
+      = link_to "&#x2191;", '#header', :class => 'up', :title => 'Back to top'
+      Designed and Developed by
+      = link_to "Snarfs", 'http://labs.rawnet.com'
