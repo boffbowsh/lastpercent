@@ -18,6 +18,7 @@ Rails::Initializer.run do |config|
   config.gem "authlogic-oid", :lib => "authlogic_openid"
   config.gem "ruby-openid", :lib => "openid"
   config.gem 'gravtastic',                      :version => '>=2.1.3'
+  config.gem 'rubyist-aasm', :lib => 'aasm', :source => 'http://gems.github.com'
 
   # Worker-specifc
   config.gem 'daemons'
