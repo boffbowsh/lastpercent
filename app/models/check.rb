@@ -9,9 +9,9 @@ class Check < ActiveRecord::Base
   aasm_state :completed
   aasm_state :failed
   
-  aasm_event :begin { transitions :from => :pending, :to => :running }
-  aasm_event :complete { transitions :from => :running, :to => :completed }
-  aasm_event :fail { transitions :from => :running, :to => :failed }
+  aasm_event(:begin) { transitions :from => :pending, :to => :running }
+  aasm_event(:complete) { transitions :from => :running, :to => :completed }
+  aasm_event(:fail) { transitions :from => :running, :to => :failed }
   
   belongs_to :asset
   belongs_to :validator
