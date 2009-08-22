@@ -10,7 +10,11 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     @user.save do |result|
       if result
-        @user.deliver_activation_instructions!
+        if @user.openid_identifier?
+          @user.activate!
+        else
+          @user.deliver_activation_instructions!
+        end
         flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
         redirect_to login_path
       else
