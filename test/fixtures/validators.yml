@@ -26,7 +26,7 @@ accessibility:
   id: 4
   class_name: LastPercentValidator::Accessibility
   active: 1
-  name: HTML validator
+  name: Accessibility Alerter
   description: Check the accessibility of the page
   permalink: accessibility
 
