@@ -12,6 +12,8 @@ class RobotsTxt
       data = url.read
       @rules.parse(robots_url, data)
     end
+  rescue
+    # Do nothing, just stop the checker bringing down the spider
   end
   
   def allowed? ( url )
