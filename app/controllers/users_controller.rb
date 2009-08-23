@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       @user.deliver_activation_confirmation!
       flash[:notice] = "Your account has been activated."
       UserSession.create(@user)
-      redirect_to root_path
+      redirect_to sites_path
     else
       render :action => :new
     end
