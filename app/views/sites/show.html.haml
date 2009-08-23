@@ -1,6 +1,10 @@
+- javascript 'jquery.timer', 'site'
+
 - content_for :content_top do
   %h1= @site
 %p
-  = link_to pluralize(@site.assets.count, 'asset'), site_assets_path(@site)
-  ,
-  = link_to pluralize(@site.results.count, 'results'), site_results_path(@site)
+  Assets:
+  = link_to @site.assets.count, site_assets_path(@site), :class => 'assets_count'
+%p
+  Errors:
+  = link_to @site.results.errors.count, site_results_path(@site), :class => 'errors_count'
