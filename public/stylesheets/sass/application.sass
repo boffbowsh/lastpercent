@@ -38,6 +38,12 @@ html
 a 
   :color #2168ac
 
+h2
+  :font-size 2em
+  :color #2065a7
+  :font-weight 100
+  :margin 0 0 40px 0
+
 h3
   :margin 0 0 20px
 
@@ -45,6 +51,12 @@ p
   :color #2E2E2E
   :font-size .9em
   :margin-bottom 20px
+  &.note
+    :display block
+    :margin 10px 0
+    :padding 5px 10px
+    :background #E7E7E7
+    +radius_corners(5px)
   
 .flash
   +radius_corners(5px)
@@ -187,7 +199,7 @@ p
           :float left
           :background #BCBCBC
           :color #575757
-          :padding 10px 8px 10px 12px
+          :padding 10px 12px
           :font-size .8em
           :text-shadow 0 1px 0px #C5C5C5
           +tab
@@ -468,3 +480,8 @@ span.current_line
   :cursor pointer
   &:hover
     :background-color #BBBDBD
+    
+#open_id_login_toggle
+  :background #DADADA url(../images/icons/openid.png) 5px center no-repeat
+  :padding-left 25px
+  
