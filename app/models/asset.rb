@@ -27,6 +27,9 @@ class Asset < ActiveRecord::Base
     super
   end
 
+  named_scope :has_content_type, :conditions => 'content_type_id IS NOT NULL'
+  named_scope :has_no_content_type, :conditions => 'content_type_id IS NULL'
+
   def enqueue
     Delayed::Job.enqueue self, 'Check' unless content_type.blank?
   end
