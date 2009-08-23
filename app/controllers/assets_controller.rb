@@ -15,7 +15,13 @@ class AssetsController < ApplicationController
 
   def search
     @assets = Asset.search "*#{params[:query]}*"
-    render :index
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :json => @assets }
+      format.xml { render :xml => @assets }
+      format.js
+    end
   end
 
   private
