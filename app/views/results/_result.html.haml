@@ -1,15 +1,10 @@
-%li[result]
-  %h3
-    = link_to result.validator.name, result
-    for
-    = link_to result.asset, result.asset
-  %p
+%li[result]{:class => cycle('odd', 'even')}
+  %h3.type= link_to result.validator.name, result
+  
+  %p.error
     = result.message
     - if result.line_no.present? && result.column_no.present?
-      %strong
-        [
-        Line:
-        = result.line_no
-        Col:
-        = result.column_no
-        ]
+      %strong= "[Line:#{result.line_no}, Col:#{result.column_no}]"        
+  %p.location
+    on page: 
+    = link_to result.asset, result.asset

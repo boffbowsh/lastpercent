@@ -29,10 +29,8 @@
     &.even
       :background #f6f6f6
     h3
-      :float left
       :font-weight bold
       :font-size .8em
-      :width 550px
       a
         :color #4c4a4a
         :text-decoration none
@@ -46,14 +44,13 @@
         :float left
         +hide-text
         :margin 0 2px 
-      .slow
         :background url(../images/icons/clock.png)
-        span.speed
-          :font-size .8em
-          :color #B0B0B0
-          :font-style italic
-          :line-height 1.3em
-          :margin-left 5px
+      span.speed
+        :font-size .8em
+        :color #B0B0B0
+        :font-style italic
+        :line-height 1.3em
+        :margin-left 5px
     p.results
       :float right
       :margin 0
@@ -94,4 +91,53 @@
         &.success_codes
           :display none
         em
-          :font-style normal    
+          :font-style normal   
+          
+.assets_list, .sites_list 
+  h3
+    :float left
+    :width 550px
+
+.results_list
+  li
+    h3
+      :font-size .8em
+      :color #383838
+      a
+        :float none
+    p.error
+      :float none
+      :font-size .8em
+      :margin 5px 0
+      :color #838383
+      strong
+        :color #505050
+    p.location
+      :margin 0
+      :font-size .8em
+      :font-weight bold
+      :color #484848
+
+.faqs_list
+  li
+    h3
+      :font-size .8em
+      :color #383838
+      :margin 0
+    p
+      :font-size .8em
+      :color #A3A3A3
+      :margin 10px 0 0 0
+      
+.sites_list
+  li
+    h3
+      :margin-top 4px
+    p.results
+      :margin-top 4px
+    a.button
+      :float right
+      :margin 0 0 0 5px
+      :font-size .7em !important
+      :-moz-box-shadow 0 0 1px rgba(0,0,0,0.1)
+      :-webkit-box-shadow 0 0 1px rgba(0,0,0,0.1)

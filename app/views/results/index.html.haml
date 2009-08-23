@@ -3,7 +3,7 @@
   %h1 Results
 
 - if @results.any?
-  %ul= render @results
+  %ul.list.results_list= render @results
   = will_paginate @results
 - else
   %p.empty
