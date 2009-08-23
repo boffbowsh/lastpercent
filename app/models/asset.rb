@@ -21,6 +21,11 @@ class Asset < ActiveRecord::Base
   after_update :enqueue
 
   after_save :save_local_copy
+  
+  def initialize
+    destroy_local_copy!
+    super
+  end
 
   def enqueue
     Delayed::Job.enqueue self, 'Check' unless content_type.blank?
@@ -102,7 +107,7 @@ class Asset < ActiveRecord::Base
 
   def local_storage_filename
     thousands = (id/1000).to_i * 1000
-    File.join(RAILS_ROOT,'cached_assets',thousands.to_s,id.to_s.rjust(4,'0'))
+    File.join(RAILS_ROOT,'cached_assets',thousands.to_s.ljust(4,'0'),id.to_s.rjust(4,'0'))
   end
 
   def body
@@ -135,7 +140,7 @@ class Asset < ActiveRecord::Base
   end
 
   def destroy_local_copy!
-    File.unlink local_storage_filename
+    File.unlink local_storage_filename if File.exist? local_storage_filename
   end
 
   def cache_data?
