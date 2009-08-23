@@ -23,8 +23,8 @@ module Anemone
       end
 
       return response, code, loc
-    rescue
-      puts "Error getting url [#{url}]"
+    rescue Exception => e
+      puts "Error getting url [#{url}] #{e}"
       return nil
     end
     

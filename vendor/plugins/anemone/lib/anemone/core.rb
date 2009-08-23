@@ -15,11 +15,23 @@ module Anemone
     def initialize(urls, &block)
       @urls = [urls].flatten.map do |url| 
         url = URI(url) if url.is_a?(String) 
+        
         # Make sure the initial string urls passed to Anemone have external flag set
         url.external = false if url.external.nil?
         url
       end
       @urls.each{ |url| url.path = '/' if url.path.empty? }
+      # Follow redirects for urls before spidering
+      begin
+        @urls.map do |url|
+          a = Anemone::HTTP.get( url )
+          url.host = a[2].host if url.host != a[2].host
+          url
+        end
+      rescue Exception => e
+        puts "Error with urls [#{e}]"
+      end
+      
       
       @tentacles = []
       @pages = PageHash.new
@@ -155,7 +167,7 @@ module Anemone
              @tentacles.each { |t| t.kill }
              break
           else            
-            until link_queue.num_waiting == @tentacles.size
+            until (link_queue.num_waiting == @tentacles.size) || Anemone.times_up?
               Thread.pass
             end
           
