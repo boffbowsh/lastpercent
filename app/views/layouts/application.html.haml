@@ -5,6 +5,7 @@
     %meta{:name => 'author', :content => 'Rawnet'}
     %meta{:name => 'keywords', :content => 'keywords TODO'}
     %meta{:name => 'description', :content => 'description TODO'}
+    %link{:rel => 'shortcut icon', :href => "/favicon.ico"}
     - if protect_against_forgery?
       :javascript
         var AUTH_TOKEN=#{form_authenticity_token.inspect};
@@ -47,7 +48,9 @@
       - if @content_for_content_top.present?
         #content_top
           = yield :content_top
-          #sub_menu= yield :breadcrumbs
+          
+      - if @content_for_breadcrumbs.present?
+        #infobar= yield :breadcrumbs
       #content.clearfix
         - flash.each do |key, msg|
           %div{:class => "flash #{key}"}= msg
