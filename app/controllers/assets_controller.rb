@@ -28,6 +28,6 @@ class AssetsController < ApplicationController
   private
 
   def current_objects
-    @current_object ||= current_model.filter_by(params).paginate  :page => params[:page]
+    @current_object ||= current_model.filter_by(params).paginate  :page => params[:page], :order => 'assets.external ASC, results.severity DESC', :include => :results
   end
 end
