@@ -16,6 +16,8 @@ class AssetsController < ApplicationController
   end
 
   def search
+    flash[:error] = "Sorry search is unavailable at the moment."
+    return redirect_to sites_path
     @assets = Asset.search "*#{params[:query]}*"
 
     respond_to do |format|
