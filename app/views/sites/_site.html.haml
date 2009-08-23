@@ -1,6 +1,7 @@
 %li[site]{:class => cycle('odd', 'even')}
   %h3= link_to site, site
   
+  = link_to "Delete", site_path(site), :class => 'button', :method => :delete, :confirm => 'Are you sure you want to delete this site? All your results will be lost.'
   %p.results
     = link_to pluralize(site.assets.count, 'asset'), site_assets_path(site), :class => 'assets'
     
@@ -12,3 +13,7 @@
       
     - if site.infos_count > 0
       = link_to "<em>#{site.infos_count}</em>", site_assets_path(site, :severity => severity(:info)), :class => 'infos', :title => "There are #{site.infos_count} errors"  
+      
+
+      
+
