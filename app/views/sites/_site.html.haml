@@ -1,3 +1,14 @@
-%li[site]
-  = link_to site, site
-  = link_to pluralize(site.assets.count, 'asset'), site_assets_path(site)
+%li[site]{:class => cycle('odd', 'even')}
+  %h3= link_to site, site
+  
+  %p.results
+    = link_to pluralize(site.assets.count, 'asset'), site_assets_path(site), :class => 'assets'
+    
+    - if site.errors_count > 0
+      = link_to "<em>#{site.errors_count}</em>", site_assets_path(site, :severity => severity(:error)), :class => 'errors', :title => "There are #{site.errors_count} errors"
+      
+    - if site.warnings_count > 0
+      = link_to "<em>#{site.warnings_count}</em>", site_assets_path(site, :severity => severity(:warning)), :class => 'warnings', :title => "There are #{site.warnings_count} errors"
+      
+    - if site.infos_count > 0
+      = link_to "<em>#{site.infos_count}</em>", site_assets_path(site, :severity => severity(:info)), :class => 'infos', :title => "There are #{site.infos_count} errors"  
