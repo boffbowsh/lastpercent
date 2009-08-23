@@ -52,4 +52,16 @@ module ApplicationHelper
       link_to(asset.response_status, site_assets_path(asset.site, :response_status => asset.response_status), :class => class_name)    
     end
   end
+  
+  def split_digits(value)
+    value = value.to_s.rjust(5, '0')
+    letters = value.to_s.split(//)
+    output = ''
+    
+    letters.each do |letter|
+      output << content_tag(:span, letter, :class => (letter == '0' ? 'zero' : ''))
+    end
+    
+    return output    
+  end
 end
