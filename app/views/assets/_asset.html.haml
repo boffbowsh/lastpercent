@@ -1,4 +1,19 @@
-%li[asset]
-  = link_to asset, asset
-  - if asset.external?
-    (external)
+%li[asset]{:class => set_asset_class(asset)}
+  %h3
+    = link_to asset, asset, :title => asset.url
+    - if asset.external?
+      %abbr.external{:title => 'This is an external site'} (external)
+    - if asset.slow?
+      %abbr.slow{:title => 'This is appears to be a bit slow to load'} (slow)
+    
+    %span.speed= "(#{asset.response_time} ms)"
+  
+  %p.results
+    - if asset.content_type
+      = link_to asset.content_type.to_pretty_s, site_assets_path(:content_type_id => asset.content_type.id), :class => 'content_type'
+      
+    = link_to "<em>#{asset.errors_count}</em>", asset_results_path(asset, :severity => severity(:error)), :class => 'errors', :title => "There are #{asset.errors_count} errors"
+    = link_to "<em>#{asset.warnings_count}</em>", asset_results_path(asset, :severity => severity(:warning)), :class => 'warnings', :title => "There are #{asset.warnings_count} errors"
+    = link_to "<em>#{asset.infos_count}</em>", asset_results_path(asset, :severity => severity(:info)), :class => 'infos', :title => "There are #{asset.infos_count} errors"
+    %span.success= asset.successes_count
+  
