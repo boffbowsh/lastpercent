@@ -27,10 +27,10 @@ class Spider
 
           asset.save!
 
-          page.links.each do |link|
-            child_asset = site.assets.find_or_create_by_url( link.to_s )
-            asset.links << child_asset unless asset.link_ids.include?( child_asset.id )
-          end
+          # page.links.each do |link|
+          #   child_asset = site.assets.find_or_create_by_url( link.to_s )
+          #   asset.links << child_asset unless asset.link_ids.include?( child_asset.id )
+          # end
         end
       end
       site.update_attribute(:spider_ended_at, Time.now)
