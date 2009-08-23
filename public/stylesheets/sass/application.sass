@@ -15,6 +15,14 @@
   :font-weight bold
   :cursor pointer
   
+=radius_corners(!radius = 10px)
+  :-moz-border-radius = !radius
+  :-webkit-border-radius = !radius
+  
+=10_radius_corners
+  :-moz-border-radius 15px
+  :-webkit-border-radius 15px
+  
 =15_radius_corners
   :-moz-border-radius 15px
   :-webkit-border-radius 15px
@@ -27,6 +35,25 @@ html
   
 a 
   :color #2168ac
+  
+.flash
+  +radius_corners(5px)
+  :background #D0D0D0
+  :padding 8px 10px
+  :margin-bottom 10px
+  :font-size .9em
+  :-moz-box-shadow 0 1px 1px rgba(0,0,0,0.2)
+  :-webkit-box-shadow 0 1px 1px rgba(0,0,0,0.2)
+  :text-shadow 0 -1px 1px rgba(0,0,0,0.25)
+  &.success
+    :background #55A142
+    :color #F9F9F9
+  &.error
+    :background #992927
+    :color #F9F9F9
+  &.notice
+    :background #CEC91B
+    :color #3A1F09
   
 #column, #header, #footer
   :width 1045px
@@ -117,18 +144,25 @@ a
   #content_top 
     :position relative
     :background #ebebeb url(../images/content_top_bg.gif) top repeat-x
-    :padding 10px 40px
+    :padding 20px 40px
     :-moz-border-radius-topleft 15px
     :-webkit-border-top-left-radius 15px
     :-moz-border-radius-topright 15px
     :-webkit-border-top-right-radius 15px
+    +clearfix
     
     h1
-      :font-size 2.8em
+      :font-size 2.1em
+      :float left
       :color #AAA
-      :margin 0
+      :margin 0 25px 0 0
       :font-weight 100
-      
+    .intro
+      :float left
+      :font-size .9em
+      :color #414141
+      :width 600px
+      :line-height 1.2em
     ul#submenu
       :position absolute
       :bottom 0
@@ -165,7 +199,7 @@ a
           :vertical-align middle
           
       
-#home
+body#home
   #content
     :width 100%
     :padding 0
@@ -232,7 +266,24 @@ a
         :right 8px
         :margin 0
 
-
+body#login_or_signup
+  #content
+    :padding 0
+    :width 100%
+    .flash
+      :margin 10px 10px 0 10px
+  #login, #register
+    :width 442px
+    :margin 20px 0
+    :padding 0 40px
+    :float left
+    h2
+      :font-size 1.8em
+      :font-weight 100
+      :color #124f89
+      :margin-bottom 10px
+  #register
+    :border-left 1px solid #E1E1E1
   
 
       
