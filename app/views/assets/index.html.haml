@@ -8,10 +8,6 @@
     %li= link_to t('site.navigation.errors'), site_results_path(@site, :severity => 2)
     %li= link_to t('site.navigation.warnings'), site_results_path(@site, :severity => 1)
 
-- form_tag search_site_assets_path, :method => :get do
-  = text_field_tag :query
-  = submit_tag 'Search'
-
 - if @assets.any?
   = will_paginate @assets
 
