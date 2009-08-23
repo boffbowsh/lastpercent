@@ -86,9 +86,10 @@ class Asset < ActiveRecord::Base
     results.infos.count
   end
   
-  def successes_count
-    0
+  def valid?
+    infos_count == 0 and warnings_count == 0 and errors_count == 0
   end
+    
 
   define_index do
     # fields
