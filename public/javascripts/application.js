@@ -17,7 +17,7 @@ $(document).ready(function() {
   });
   
   $('form#new_user_session')
-    .prepend('<a href="#" class="button" id="open_id_login_toggle">Signup with Open ID</a>')
+    .prepend('<a href="#" class="button" id="open_id_login_toggle">Sign in with Open ID</a>')
     .find('#open_id_login_toggle')
     .click(function() {
      

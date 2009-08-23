@@ -261,7 +261,7 @@ body#home
     :padding 0
     +radius_corners(15px)
     :background #fff url(../images/home_content_bg.jpg) left repeat-y
-  #introduction, #search
+  #introduction, #search, #latest
     :float left
     :padding 65px 40px
   #introduction
@@ -291,6 +291,7 @@ body#home
   #search
     :width 475px
     :padding-top 80px
+    :padding-bottom 30px
     label
       :font-size 1.3em
       :color #404040
@@ -323,6 +324,18 @@ body#home
         :top 8px
         :right 8px
         :margin 0
+  #latest
+    :width 475px
+    :padding-top 30px
+    :border-top 1px solid #DFDFDF
+    h2
+      :font-size 1.2em
+      :color #3F3F3F
+      :margin-bottom 10px
+    ul
+      :list-style circle inside
+      li
+        :margin-bottom 5px
 
 body#login_or_signup
   #column 

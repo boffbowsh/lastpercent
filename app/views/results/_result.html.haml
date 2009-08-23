@@ -1,6 +1,6 @@
 %li[result]{:class => cycle('odd', 'even')}
-  %h3.type= link_to result.validator.name, result
-  
+  %h3.type
+    = link_to result.validator.name, result
   %p.error
     = result.message
     - if result.line_no.present? && result.column_no.present?
@@ -8,3 +8,8 @@
   %p.location
     on page: 
     = link_to result.asset, result
+
+  %p.results
+    %span{:class => severity_name(result.severity).pluralize}
+      = severity_name(result.severity).titleize
+

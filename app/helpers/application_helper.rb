@@ -3,6 +3,15 @@ module ApplicationHelper
     ERROR_SEVERITY[type] rescue 1
   end
   
+  def severity_name(severity)
+    case severity
+    when 2 then 'error'
+    when 1 then 'warning'
+    else 
+      'info'
+    end
+  end
+  
   def set_asset_class(asset)
     klass = []
     klass << 'asset'

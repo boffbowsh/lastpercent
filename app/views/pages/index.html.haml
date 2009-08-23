@@ -13,3 +13,11 @@
   %p.login
     = t('page.home.login_small', :default => 'Already have an account?')
     = link_to t('page.home.login_link', :default => 'Sign in'), login_path
+    
+#latest
+  %h2 Recently scanned websites
+  
+  %ul
+    - @latest.each do |site|
+      %li= link_to site.to_s, site.url
+
