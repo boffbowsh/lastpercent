@@ -1,6 +1,0 @@
-css:
-  uri: http://127.0.0.1:8180/css-validator/validator
-html:
-  uri: http://127.0.0.1/cgi-bin/check
-feed:
-  uri: http://127.0.0.1/cgi-bin/check.cgi

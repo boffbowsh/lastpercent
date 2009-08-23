@@ -1,1 +1,0 @@
-ValidatorConfig = YAML.load( open(File.join(RAILS_ROOT, 'config/validator_config.yml')).read )

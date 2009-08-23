@@ -3,7 +3,7 @@ require 'w3c_validators'
 class LastPercentValidator::Feed < LastPercentValidator::Base
     
   def run
-    @validator = W3CValidators::FeedValidator.new(:validator_uri => ValidatorConfig['feed']['uri'])
+    @validator = W3CValidators::FeedValidator.new(:validator_uri => Settings.feed_uri)
     
     #results = @validator.validate_file(fp)
     results = @validator.validate_text(@asset.body)
