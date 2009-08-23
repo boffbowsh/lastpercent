@@ -12,6 +12,8 @@ class Site < ActiveRecord::Base
   validates_associated :user
   # validates_presence_of :verification_token
   validate :not_reached_site_limit
+  
+  named_scope :latest, :order => 'created_at desc', :limit => 5
 
   def to_s
     name.blank? ? url : name

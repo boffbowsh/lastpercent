@@ -4,5 +4,6 @@ class PagesController < HighVoltage::PagesController
   def index
     @body_id = 'home'
     @site = Site.new
+    @latest = Site.latest
   end
 end

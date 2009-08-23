@@ -24,6 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_user
+    session[:site_url] = params[:site][:url] if params[:site] and params[:site][:url]
     access_denied('You must be logged in to do that!') unless current_user
   end
 
