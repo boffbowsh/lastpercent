@@ -1,0 +1,9 @@
+- clever_form_for @site do |form|
+  %label{:for => :site_url}
+    = t('forms.search.label', :default => 'Enter your site address')
+    - if form.object.errors.on(:site_url).present?
+      %p.error= form.object.errors.on(:site_url)
+      
+  .fake_input
+    = form.text_field :url, :inline => true
+    = form.submit t('forms.search.submit', :default => 'Start')
