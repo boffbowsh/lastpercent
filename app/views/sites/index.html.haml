@@ -4,7 +4,11 @@
 
 %p.intro= t('site.index.intro')
 
-%ul.list= render @sites
-= will_paginate @sites
-
-%p= link_to "New Site", new_site_path, :class => 'button'
+- if @sites.any?
+  %ul.list= render @sites
+  = will_paginate @sites
+  %p= link_to "Check another site", new_site_path, :class => 'button'
+- else
+  %p.empty
+    You've not got any sites yet,
+    = link_to "check a new site.", new_site_path, :class => 'button'

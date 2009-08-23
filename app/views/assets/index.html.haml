@@ -6,21 +6,29 @@
 - form_tag search_site_assets_path, :method => :get do
   = text_field_tag :query
   = submit_tag 'Search'
-  
-= will_paginate @assets
 
-%dl.list_dl.asset_list_dl
-  %dt.assets Assets
-  %dd A list of assets that have been found on your site.
-  %dt.results Results
-  %dd The results for each asset.
-  
-  
-%ul.list.asset_list
-  = render :partial => 'asset', :collection =>  @assets
+- if @assets.any?
+  = will_paginate @assets
 
-= will_paginate @assets
+  %dl.list_dl.asset_list_dl
+    %dt.assets Assets
+    %dd A list of assets that have been found on your site.
+    %dt.results Results
+    %dd The results for each asset.
 
-- form_tag site_assets_path, :method => :get do
-  = select_tag :content_type_id, options_from_collection_for_select(@site.content_types, :id, :to_s, params[:content_type_id].to_i)
-  = submit_tag 'Filter'
+  %ul.list.asset_list
+    = render :partial => 'asset', :collection =>  @assets
+  = will_paginate @assets
+  %p.note
+    We also found
+    = pluralize(@site.assets.has_no_content_type.count, 'other asset')
+    but we've not checked it yet.
+    = link_to "Why?", page_path('faq')
+- else
+  %p.empty
+    No assets could be found.
+
+- if @site.content_types.any?
+  - form_tag site_assets_path, :method => :get do
+    = select_tag :content_type_id, options_from_collection_for_select(@site.content_types, :id, :to_s, params[:content_type_id].to_i)
+    = submit_tag 'Filter'
