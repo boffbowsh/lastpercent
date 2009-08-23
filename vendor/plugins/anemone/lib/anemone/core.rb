@@ -148,7 +148,7 @@ module Anemone
         
         if (link_queue.empty? && page_queue.empty?) || Anemone.times_up?
           if  Anemone.times_up?
-             @tentacles.each { |t| puts t.inspect; t.kill }
+             @tentacles.each { |t| t.kill }
              break
           else            
             until link_queue.num_waiting == @tentacles.size
