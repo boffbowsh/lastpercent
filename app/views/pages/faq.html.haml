@@ -1,13 +1,13 @@
 - content_for :content_top do
   %h1 Frequently Asked Questions
 
-%ul.list
-  %li
+%ul.list.faqs_list
+  %li.odd
     %h3 What do you check on my website?
     %p We check that your HTML, CSS, XML, RSS and Atom files are all valid. We also check Accessibility and also some other small checks like looking for 'lorem ipsum'
-  %li
+  %li.even
     %h3 How long do you store the data?
     %p For the duration of Rails Rumble no data will be deleted unless we start running out of space!
-  %li
+  %li.odd
     %h3 The site didn't get all the resources on my site, why not?
     %p If we can't determine the content type of a file, we won't do anything with it!
