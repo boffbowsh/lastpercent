@@ -1,7 +1,7 @@
-- breadcrumbs(link_to('Sites', sites_path), link_to(@asset.site, @asset.site), link_to('Assets', site_assets_path(@asset.site)), @asset)
+- breadcrumbs(link_to('Sites', sites_path), link_to(truncate(@asset.site.to_s, :length => 50), @asset.site), link_to('Assets', site_assets_path(@asset.site)), truncate(@asset.to_s, :length => 50))
 - content_for :content_top do
   %h1
-    = @asset
+    = truncate(@asset.to_s, :length => 50)
     = link_to "&#x2192;", @asset.url, :rel => :external
 
 %p

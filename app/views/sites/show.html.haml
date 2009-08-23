@@ -1,5 +1,5 @@
 - javascript 'jquery.timer', 'site'
-- breadcrumbs(link_to('Sites', sites_path), @site.to_s)
+- breadcrumbs(link_to('Sites', sites_path), truncate(@site.to_s, :length => 50))
 
 - content_for :content_top do
   %h1= @site

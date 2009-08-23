@@ -1,4 +1,4 @@
-- breadcrumbs(link_to('Sites', sites_path), link_to(@site, @site), 'Assets')
+- breadcrumbs(link_to('Sites', sites_path), link_to(truncate(@site.to_s, :length => 50), @site), 'Assets')
 
 - content_for :content_top do
   %h1 Assets
