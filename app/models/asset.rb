@@ -116,7 +116,8 @@ class Asset < ActiveRecord::Base
     @body ||= read_local_copy
   end
 
-  def excerpt(line_no, column_no = nil, range = 10)
+  def excerpt(line_no = nil, column_no = nil, range = 10)
+    return if line_no.nil?
     if body
       count = 1
       excerpt = ""

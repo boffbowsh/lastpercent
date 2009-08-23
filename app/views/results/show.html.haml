@@ -5,7 +5,7 @@
 %p
   = @result
 
-~ content_tag :pre, @result.asset.excerpt(@result.line_no, @result.column_no)
+~ content_tag :pre, @result.asset.excerpt(@result.line_no, @result.column_no) unless @result.line_no.blank? or @result.asset.body.blank?
 
 %h3
   Find out more
