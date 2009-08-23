@@ -27,7 +27,19 @@ class Result < ActiveRecord::Base
   def set_asset_id
     write_attribute :asset_id, check.asset_id
   end
-
+  
+  def error?
+    severity == 2
+  end
+  
+  def warning?
+    severity == 1
+  end
+  
+  def info?
+    severity == 0
+  end
+  
   def self.filter_by(params)
     if params[:severity].present?
       scoped_by_severity params[:severity]
