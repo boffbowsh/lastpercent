@@ -1,1 +1,5 @@
 %h2= @site
+%p
+  = link_to pluralize(@site.assets.count, 'asset'), site_assets_path(@site)
+  ,
+  = link_to pluralize(@site.results.count, 'results'), site_results_path(@site)

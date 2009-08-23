@@ -16,15 +16,43 @@
       = stylesheet_link_tag 'iphone'
       %link{:rel => "apple-touch-icon", :href => "/images/home-icon.png"}
     %title Last Percent
-  %body
+  %body{:id => @body_id || nil}
     #header
-      %h1= link_to 'Last Percent', root_path, :rel => :home
-      %p= current_user
-    #content
-      - flash.each do |key, msg|
-        .flash{:id => key}= msg
-      = yield
+      %h1= link_to t('app.title'), root_path, :rel => :home
+      
+      %ul#menu
+        %li= link_to t('layout.navigation.home'), root_path
+        
+        - if current_user
+          %li= link_to t('layout.navigation.sites'), sites_path
+        - else
+          %li= link_to t('layout.navigation.signin_or_register'), login_path
+        
+        %li= link_to t('layout.navigation.about'), page_path(:about)
+        %li= link_to t('layout.navigation.faq'), page_path(:faq)
+        
+      -if current_user
+        #account
+          %p 
+            Welcome back
+            = current_user
+          %ul#accountmenu
+            %li= link_to t('layout.navigation.account'), edit_user_path(current_user)
+            %li= link_to t('layout.navigation.logout'), logout_path
+          %div.gravatar
+            = image_tag current_user.gravatar_url
+
+    #column
+      - if @content_for_content_top.present?
+        #content_top
+          = yield :content_top 
+      #content.clearfix
+        - flash.each do |key, msg|
+          %div{:class => "flash #{key}"}= msg
+          
+        = yield
     #footer
-      = link_to "&#x2191;", '#header', :class => 'up', :title => 'Back to top'
-      Designed and Developed by
-      = link_to "Snarfs", 'http://labs.rawnet.com'
+      %p
+        = link_to "&#x2191;", '#header', :class => 'up', :title => t('layout.navigation.top')
+        Designed and Developed by
+        = link_to "Snarfs", 'http://labs.rawnet.com'

@@ -7,4 +7,7 @@ class ContentType < ActiveRecord::Base
   validates_presence_of :mime_type
   validates_uniqueness_of :mime_type
 
+  def to_s
+    mime_type
+  end
 end

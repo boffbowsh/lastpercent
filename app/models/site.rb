@@ -3,6 +3,7 @@ class Site < ActiveRecord::Base
   belongs_to :user
   has_many :assets
   has_many :results, :through => :assets
+  has_many :content_types, :through => :assets, :uniq => true
 
   # Validations
   validates_presence_of :url

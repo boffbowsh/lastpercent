@@ -1,0 +1,289 @@
+@import reset.sass
+@import clearfix.sass
+@import forms.sass
+
+=hide-text
+  :overflow hidden
+  :text-indent -9999em
+  
+=tab
+  :-moz-border-radius-topleft 5px
+  :-webkit-border-top-left-radius 5px
+  :-moz-border-radius-topright 5px
+  :-webkit-border-top-right-radius 5px
+  :text-decoration none
+  :font-weight bold
+  :cursor pointer
+  
+=radius_corners(!radius = 10px)
+  :-moz-border-radius = !radius
+  :-webkit-border-radius = !radius
+  
+=10_radius_corners
+  :-moz-border-radius 15px
+  :-webkit-border-radius 15px
+  
+=15_radius_corners
+  :-moz-border-radius 15px
+  :-webkit-border-radius 15px
+  
+html
+  :background #e9e9e9 url(../images/body_bg.gif) top repeat-x
+  :font 1em Arial, sans-serif
+  :text-align center
+  :color #717171
+  
+a 
+  :color #2168ac
+  
+.flash
+  +radius_corners(5px)
+  :background #D0D0D0
+  :padding 8px 10px
+  :margin-bottom 10px
+  :font-size .9em
+  :-moz-box-shadow 0 1px 1px rgba(0,0,0,0.2)
+  :-webkit-box-shadow 0 1px 1px rgba(0,0,0,0.2)
+  :text-shadow 0 -1px 1px rgba(0,0,0,0.25)
+  &.success
+    :background #55A142
+    :color #F9F9F9
+  &.error
+    :background #992927
+    :color #F9F9F9
+  &.notice
+    :background #CEC91B
+    :color #3A1F09
+  
+#column, #header, #footer
+  :width 1045px
+  :margin 0 auto
+  :text-align left
+  
+#footer
+  :margin-top 10px
+  p
+    :font-size .8em
+    :padding 0 10px
+    :text-align right
+    :color #6F6F6F
+    a.up
+      :text-decoration none
+      :float left 
+
+  
+#header
+  :position relative
+
+  h1
+    :height 117px
+    :width 220px
+    :background url(../images/logo.png) top no-repeat
+    :margin 30px 0 0 40px
+    a
+      :display block
+      :height 117px
+      :width 220px
+      +hide-text
+
+  #menu
+    :position absolute
+    :bottom 0
+    :right 40px
+    li
+      :display block
+      :float left
+      :margin-left 2px
+      a
+        :display block
+        :float left
+        :padding 8px 12px
+        :color #666666
+        :font-size .8em
+        :background #BABABA
+        +tab
+        &:hover
+          :background #8F8F8F
+          :color #474747
+
+  #account
+    :position absolute
+    :top 0
+    :right 0
+    *
+      :float left
+      :display inline
+    p, ul li
+      :margin-top 15px
+      :font-size .8em
+    ul
+      li
+        :margin-left 5px
+        :padding-left 5px
+        :border-left 1px solid #B3B1B8
+    .gravatar
+      :margin-left 10px
+      :background #fff
+      :padding 4px
+
+
+#column
+  :background #fff
+  :-moz-border-radius 15px
+  :-webkit-border-radius 15px
+  :-moz-border-radius 15px
+  :-webkit-border-radius 15px
+  
+  #content
+    :width 1005px
+    :padding 20px
+    +15_radius_corners
+    :-moz-box-shadow 0 2px 3px rgba(0,0,0,0.1)
+    :-webkit-box-shadow 0 2px 3px rgba(0,0,0,0.1)
+  
+  #content_top 
+    :position relative
+    :background #ebebeb url(../images/content_top_bg.gif) top repeat-x
+    :padding 20px 40px
+    :-moz-border-radius-topleft 15px
+    :-webkit-border-top-left-radius 15px
+    :-moz-border-radius-topright 15px
+    :-webkit-border-top-right-radius 15px
+    +clearfix
+    
+    h1
+      :font-size 2.1em
+      :float left
+      :color #AAA
+      :margin 0 25px 0 0
+      :font-weight 100
+    .intro
+      :float left
+      :font-size .9em
+      :color #414141
+      :width 600px
+      :line-height 1.2em
+    ul#submenu
+      :position absolute
+      :bottom 0
+      :right 0
+      li
+        :display block
+        :float left
+        :margin-right 5px
+        a
+          :display block
+          :float left
+          :background #dfdfdf
+          :color #575757
+          :padding 10px 8px 10px 12px
+          :font-size .9em
+          +tab
+          :-moz-border-radius-topleft 10px
+          :-webkit-border-top-left-radius 10px
+          :-moz-border-radius-topright 10px
+          :-webkit-border-top-right-radius 10px
+          &:hover
+            :background #CDCDCD
+        &.active
+          a
+            :background #fff
+        span.count
+          :padding 4px
+          :background #b8b8b8
+          :color #fff
+          :font-size .7em
+          :margin-left 5px
+          :-moz-border-radius 8px
+          :-webkit-border-radius 8px
+          :vertical-align middle
+          
+      
+body#home
+  #content
+    :width 100%
+    :padding 0
+    :background url(../images/home_content_bg.jpg) left repeat-y
+  #introduction, #search
+    :float left
+    :padding 65px 40px
+  #introduction
+    :width 410px
+    h1
+      :font-size 2em
+      :font-weight 100
+      :letter-spacing -0.005em
+      :color #BCBCBC
+      :margin-bottom 20px
+    p
+      :color #2E2E2E
+      :font-size 1.1em
+      :margin-bottom 20px
+    h2
+      :font-size 1.2em
+      :font-weight 100
+      :letter-spacing -0.005em
+      :color #878787
+      :margin-bottom 10px
+    ul
+      li
+        :float left
+        :margin-right 10px
+        :border 5px solid #DCDCDC
+  #search
+    :width 475px
+    :padding-top 80px
+    label
+      :font-size 1.3em
+      :color #404040
+      :font-weight bold
+      :letter-spacing -0.005em
+      :margin-bottom 10px
+      :display block
+    p.login
+      :display block
+      :font-size .8em
+      :color #898989
+      :margin-top 4px
+      :text-align right
+    .fake_input
+      :border 2px solid #DEDFD7
+      :background #f8f8f8
+      :padding 0
+      :position relative
+
+      input[type="text"]
+        :background none
+        :border none
+        :padding 5px
+        :font-size 2em
+        :width 390px
+        :color #4B4B4B
+        :letter-spacing -0.05em
+      input[type="submit"]
+        :position absolute
+        :top 8px
+        :right 8px
+        :margin 0
+
+body#login_or_signup
+  #content
+    :padding 0
+    :width 100%
+    .flash
+      :margin 10px 10px 0 10px
+  #login, #register
+    :width 442px
+    :margin 20px 0
+    :padding 0 40px
+    :float left
+    h2
+      :font-size 1.8em
+      :font-weight 100
+      :color #124f89
+      :margin-bottom 10px
+  #register
+    :border-left 1px solid #E1E1E1
+  
+
+      

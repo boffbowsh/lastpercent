@@ -1,23 +1,23 @@
 worker-disabled:
   name: disabled
-  type: Worker
+  state_type: Worker
 
 worker-enabled:
   name: enabled
-  type: Worker
+  state_type: Worker
   
 check-pending:
   name: pending
-  type: Check
+  state_type: Check
 
 check-running:
   name: running
-  type: Check
+  state_type: Check
 
 check-completed:
   name: completed
-  type: Check
+  state_type: Check
 
 check-failed:
   name: failed
-  type: Check
+  state_type: Check

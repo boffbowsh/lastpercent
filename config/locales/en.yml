@@ -1,5 +1,36 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  app:
+    title: Last Percent
+  layout:
+    navigation:
+      home: Home
+      sites: My Sites
+      account:  My Account
+      logout: Sign Out
+      top: Back to top
+      about: About
+      faq: FAQ
+      signin_or_register: Sign in or Register
+  site:
+    navigation:
+      overview: Overview
+      errors: Errors
+      warnings: Warnings
+  pages:
+    home:
+      title: Welcome to Last Percent
+      intro: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa."
+      screenshots:
+        intro: A few screenshots 
+        overview: This is a test screenshot
+    login:
+      title: Sign in or register
+      intro: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa."
+    about:
+      title: About Last Percent
+    contact:
+      title: Contact Us
+  forms:
+    search:
+      label: Enter your website address
+      submit: Start

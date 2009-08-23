@@ -7,4 +7,8 @@ class Message < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :validator_id
   validates_associated :validator
+
+  def to_s
+    body
+  end
 end

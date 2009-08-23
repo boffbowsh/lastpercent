@@ -2,5 +2,5 @@
   = @asset
   = link_to "&#x2192;", @asset.url, :rel => :external
 
-%pre
-  = h @asset.body
+%p
+  = link_to pluralize(@asset.results.count, 'results'), asset_results_path(@asset)

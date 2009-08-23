@@ -21,12 +21,14 @@ class Asset < ActiveRecord::Base
   after_update :enqueue
 
   def enqueue
-    Delayed::Job.enqueue self unless mime_type.blank?
+    Delayed::Job.enqueue self
   end
 
   def create_checks
-    validators.active.each do |v|
-      checks.find_or_create_by_validator_id v.id
+    if checkable?
+      validators.active.each do |v|
+        checks.find_or_create_by_validator_id v.id
+      end
     end
   end
 
@@ -34,5 +36,29 @@ class Asset < ActiveRecord::Base
 
   def to_s
     url
+  end
+
+  def checkable?
+    internal && content_type_id.present?
+  end
+
+  def internal
+    !external?
+  end
+
+  def self.filter_by(params)
+    if params[:content_type_id].present?
+      scoped_by_content_type_id params[:content_type_id]
+    else
+      scoped
+    end
+  end
+
+  define_index do
+    # fields
+    indexes :url
+
+    # attributes
+    has :created_at, :external, :response_status, :response_time
   end
 end

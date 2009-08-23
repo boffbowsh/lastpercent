@@ -1,0 +1,11 @@
+%h2= @validator
+
+%p
+  Active:
+  = @validator.active?
+
+%p
+  Check Count:
+  = @validator.checks.count
+
+%p= link_to "Edit", edit_admin_validator_path(@validator)

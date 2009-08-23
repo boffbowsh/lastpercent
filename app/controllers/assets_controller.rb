@@ -3,6 +3,7 @@ class AssetsController < ApplicationController
   
   make_resourceful do
     actions :all, :except => [:edit, :update]
+    collection_actions :search
     belongs_to :site
 
     publish :xml, :json, :attributes => [:id, :url]
@@ -13,9 +14,20 @@ class AssetsController < ApplicationController
     end
   end
 
+  def search
+    @assets = Asset.search "*#{params[:query]}*"
+
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render :json => @assets }
+      format.xml { render :xml => @assets }
+      format.js
+    end
+  end
+
   private
 
   def current_objects
-    @current_object ||= current_model.paginate  :page => params[:page]
+    @current_object ||= current_model.filter_by(params).paginate  :page => params[:page]
   end
 end
