@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
     end
   end
 
-  is_gravtastic :with => :email, :rating => 'R', :size => 30
+  is_gravtastic :with => :email, :rating => 'R', :size => 40
 
   is_paranoid
 
