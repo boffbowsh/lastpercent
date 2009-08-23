@@ -34,7 +34,7 @@ depend :remote, :gem, 'w3c_validators',                   ">0"
 depend :remote, :gem, 'mechanize',                        ">0"
 depend :remote, :gem, 'raakt',                            ">0"
 
-set :local_shared_files, %w(config/database.yml db/sphinx)
+set :local_shared_files, %w(config/database.yml db/sphinx tmp/pids cached_assets)
 
 ssh_options[:forward_agent] = true
 default_run_options[:pty] = true
@@ -87,6 +87,30 @@ namespace :deploy do
   end
 end
 
+WORKERS = {'moe' => 'Site', 'barney' => 'Check'}
+
+def workers_method method
+  WORKERS.each do |name,job_type|
+    yield "cd #{current_path} && script/delayed_job #{method} #{name} #{job_type} -- #{rails_env}"
+  end
+end
+
+namespace :workers do
+  desc "Stop workers"
+  task :stop, :roles => :app do
+    workers_method 'stop' do |cmd|
+      run cmd
+    end
+  end
+
+  desc "Start workers"
+  task :start, :roles => :app do
+    workers_method 'start' do |cmd|
+      run cmd
+    end
+  end
+end
+
 namespace :sphinx do
   desc "Generate the sphinx index"
   task :index, :roles => :app do
@@ -116,3 +140,6 @@ end
 
 #after "deploy:symlink", "deploy:update_crontab"
 after "deploy", "sphinx:rebuild"
+
+before "deploy", "workers:stop"
+after "deploy", "workers:start"
