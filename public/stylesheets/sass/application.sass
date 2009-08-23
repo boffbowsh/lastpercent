@@ -356,4 +356,48 @@ body#login_or_signup
       :background #1389CE
       :color #fff
 
-      
+#summary
+  +clearfix
+  .box
+    :float left
+    :width 24%
+    :border-right 1px solid #E2E2E2
+    :padding 0 0 15px 0
+    :position relative
+    h3
+      :font-size 1.2em
+      :color #333
+      :margin 0 10px 5px 10px
+    em
+      :display block
+      :margin-left 10px
+      +clearfix
+      span
+        :color #212121
+        :font-size 4.2em
+        :display block
+        :float left
+        :width .6em
+        :margin-left 1px
+        :text-align center
+        :padding 2px 0
+        :font-weight bold
+        :font-style normal
+        &.zero
+          :color #DBDBDB !important
+    &.errors
+      em span
+        :color #a71818
+    &.warnings
+      em span
+        :color #ffcf5d
+    &.successes
+      em span
+        :color #31a11b
+    .bar
+      :width 100%
+      :background #EBEBEB
+      :position absolute
+      :padding 0
+      :bottom 0
+      :height 10px
