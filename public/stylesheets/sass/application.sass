@@ -22,7 +22,7 @@
 =15_radius_corners
   :-moz-border-radius 15px
   :-webkit-border-radius 15px
-
+  
 @import reset.sass
 @import clearfix.sass
 @import forms.sass
@@ -143,7 +143,10 @@ p
   #content
     :width 965px
     :padding 20px 40px
-    +radius_corners(15px)
+    :-moz-border-radius-bottomleft 15px
+    :-webkit-border-bottom-left-radius 15px
+    :-moz-border-radius-bottomright 15px
+    :-webkit-border-bottom-right-radius 15px
     :-moz-box-shadow 0 2px 3px rgba(0,0,0,0.1)
     :-webkit-box-shadow 0 2px 3px rgba(0,0,0,0.1)
   
@@ -244,6 +247,7 @@ body#home
   #content
     :width 100%
     :padding 0
+    +radius_corners(15px)
     :background #fff url(../images/home_content_bg.jpg) left repeat-y
   #introduction, #search
     :float left
@@ -463,4 +467,3 @@ span.current_line
   :cursor pointer
   &:hover
     :background-color #BBBDBD
-
