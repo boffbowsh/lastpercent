@@ -134,21 +134,22 @@ a
   +radius_corners(15px)
   
   #content
-    :width 1005px
-    :padding 20px
+    :width 965px
+    :padding 20px 40px
     +radius_corners(15px)
     :-moz-box-shadow 0 2px 3px rgba(0,0,0,0.1)
     :-webkit-box-shadow 0 2px 3px rgba(0,0,0,0.1)
   
   #content_top 
     :position relative
-    :background #ebebeb url(../images/content_top_bg.gif) top repeat-x
-    :padding 20px 40px
+    :background #ebebeb url(../images/content_top_bg.gif) bottom repeat-x
+    :padding 20px 40px 30px 40px
     :-moz-border-radius-topleft 15px
     :-webkit-border-top-left-radius 15px
     :-moz-border-radius-topright 15px
     :-webkit-border-top-right-radius 15px
     +clearfix
+    :margin-bottom 20px
     
     h1
       :font-size 2.1em
@@ -162,6 +163,32 @@ a
       :color #414141
       :width 600px
       :line-height 1.2em
+    ul#breadcrumbs
+      :position absolute
+      :left 0
+      :bottom -18px
+      :height 35px
+      :background url(../images/breadcrumb_bg.png) right no-repeat
+      li
+        :float left
+        :height 35px
+        :line-height 35px
+        :padding 0 10px 0 25px
+        :font-size .75em
+        :font-weight bold
+        :z-index 9999
+        :background url(../images/breadcrumb_li_bg.png) left no-repeat
+        &.first
+          :padding-left 40px
+          :background url(../images/breadcrumb_repeat_bg.png) left repeat-x
+        &.last
+          :padding-right 20px
+          :background url(../images/breadcrumb_right_arrow.png) left no-repeat
+        a
+          :text-decoration none
+          :color #4D4D4D
+          &:hover
+            :text-decoration underline
     ul#submenu
       :position absolute
       :bottom 0
