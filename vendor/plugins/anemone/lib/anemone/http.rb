@@ -9,7 +9,7 @@ module Anemone
     # Retrieve an HTTP response for *url*, following redirects.
     # Returns the response object, response code, and final URI location.
     # 
-    def self.get(url)      
+    def self.get(url)
       response = get_response(url)
       code = Integer(response.code)
       loc = url
@@ -23,6 +23,9 @@ module Anemone
       end
 
       return response, code, loc
+    rescue
+      puts "Error getting url [#{url}]"
+      return nil
     end
     
     #

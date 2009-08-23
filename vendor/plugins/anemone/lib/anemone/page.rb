@@ -1,7 +1,6 @@
 require 'anemone/http'
 require 'anemone/link'
-require 'nokogiri'
-require 'ostruct'
+
 
 module Anemone
   class Page
@@ -15,7 +14,7 @@ module Anemone
     
     # OpenStruct for user-stored data
     attr_accessor :data
-    # Nokogiri document for the HTML body
+    # Doc to hold the HTML body
     attr_accessor :doc
     # Integer response code of the page
     attr_accessor :code	
@@ -47,11 +46,14 @@ module Anemone
         end
               
         aka = nil
-        if !url.eql?(location)
+        if location && !url.eql?(location)
           aka = location
         end
         
-        if url.is_external?
+        if response.nil? # The was no response from the server
+          return Page.new(url)
+        elsif url.is_external? || !Page.html?( Page.content_type_sanitize( response.to_hash['content-type'] ) )
+          
           return Page.new(url, nil, code, response.to_hash, aka, response_time)
         else
           return Page.new(url, response.body, code, response.to_hash, aka, response_time)
@@ -79,19 +81,22 @@ module Anemone
 
       if body
         begin
-          @doc = Nokogiri::HTML(body)
+          @doc = body
         rescue
           return
         end
 
         return if @doc.nil?
         
-        Link.find_all_links_in(self) 
+        if self.html?
+          Link.find_all_links_in(self) 
+        end
         
         @links.uniq!
       end
     rescue Exception => exp
       puts "An error occured [#{exp}]"
+      Page.new(url)
     end
     
     
@@ -132,7 +137,10 @@ module Anemone
     # The content-type returned by the HTTP request for this page
     #
     def content_type
-      @headers['content-type'][0] rescue nil
+      return blank_type if @headers.nil?
+      
+      # if no content type is supplied return and empty string instead of nil
+      Page.content_type_sanitize( @headers['content-type'] ) 
     end
     
     #
@@ -140,7 +148,7 @@ module Anemone
     # otherwise.
     #
     def html?
-      (@content_type =~ /text\/html/) == 0
+      Page.html? content_type
     end
     
     #
@@ -158,7 +166,21 @@ module Anemone
     def not_found?
       404 == @code
     end
+     
+    def self.content_type_sanitize( dirty_mime_type )
+      return blank_type if dirty_mime_type.nil?
+      
+      mime_type = dirty_mime_type[0] if dirty_mime_type.is_a?(Array)
+      mime_type.split(';').first rescue blank_type
+    end
     
+    def self.html?( mime_type )
+    (mime_type =~ /text\/html/) == 0
+    end
+    
+    def blank_type
+      "BLANK"
+    end
     
   end
 end

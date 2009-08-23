@@ -1,3 +1,5 @@
+require 'nokogiri'
+require 'ostruct'
 module Anemone
   class Link
     class <<self
@@ -12,7 +14,6 @@ module Anemone
       # Use loaded subclasses of Link to search for more resources in the current page
       def find_all_links_in(page)
         subclasses.each do |sc|
-          # puts "SUBCLASS [#{sc}]"
           sc.constantize.find_links_in(page)
         end
       rescue Exception => exp
@@ -21,7 +22,8 @@ module Anemone
       
       def find_links_for(page, tag_name, attr_name)
         #get a list of distinct links on the page, in absolute url form
-        page.doc.css(tag_name).each do |a| 
+        ndoc = Nokogiri::HTML(page.doc)
+        ndoc.css(tag_name).each do |a| 
           u = a.attributes[attr_name].content if a.attributes[attr_name]
           next if u.nil?
 

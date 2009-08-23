@@ -142,6 +142,8 @@ module Anemone
         
         # if we are done with the crawl, tell the threads to end
 
+        # puts "QSize [#{link_queue.size}] QWaiting [#{link_queue.num_waiting}] QEmpty [#{link_queue.empty?}]"
+        # puts " TSize [#{@tentacles.size}] PWaiting [#{page_queue.num_waiting}] PEmpty [#{page_queue.empty?}]"
         if link_queue.empty? && page_queue.empty?
           until link_queue.num_waiting == @tentacles.size
             Thread.pass
@@ -154,7 +156,7 @@ module Anemone
         end
     
       end
-
+      puts "We've finished"
       @tentacles.each { |t| t.join }
 
       do_after_crawl_blocks()
