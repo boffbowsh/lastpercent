@@ -23,11 +23,6 @@ class Asset < ActiveRecord::Base
 
   after_save :save_local_copy
   
-  def initialize
-    destroy_local_copy!
-    super
-  end
-
   named_scope :has_content_type, :conditions => 'content_type_id IS NOT NULL'
   named_scope :has_no_content_type, :conditions => 'content_type_id IS NULL'
 
