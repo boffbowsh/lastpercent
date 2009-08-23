@@ -12,4 +12,11 @@ $(document).ready(function() {
     open_id_field.show();
     return false;
   });
+
+  // lightbox setup
+  $('a.lightbox').fancybox({
+    hideOnContentClick: false,
+    frameWidth: 600,
+    frameHeight: 400
+  });
 });
