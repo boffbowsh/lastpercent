@@ -1,6 +1,8 @@
-= form.text_field :email
-= form.password_field :password
-= form.password_field :password_confirmation
-= form.text_field :first_name
-= form.text_field :last_name
-= form.text_field :openid_identifier, :class => 'openid'
+- clever_form_for @user || User.new do |form|
+  = form.text_field :email
+  = form.password_field :password
+  = form.password_field :password_confirmation
+  = form.text_field :first_name
+  = form.text_field :last_name
+  = form.text_field :openid_identifier, :class => 'openid'
+  = form.submit
