@@ -14,8 +14,10 @@ en:
   site:
     navigation:
       overview: Overview
+      assets: Browse Assets
       errors: Errors
       warnings: Warnings
+      add: Add New Site
     index: 
       intro: 'This is a list of all the sites we have for you on the system. From here you can see an overview of the output that we have generated, and you can drill down into more detail'
   pages:
