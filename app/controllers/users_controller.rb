@@ -6,6 +6,11 @@ class UsersController < ApplicationController
   make_resourceful do
     actions :all, :except => :create
     member_actions :delete
+    
+    response_for :create, :update do 
+      flash[:notice] = 'User successfully saved'
+      redirect_to edit_user_path
+    end
   end
 
   def create
