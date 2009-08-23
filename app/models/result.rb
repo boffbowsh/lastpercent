@@ -14,12 +14,20 @@ class Result < ActiveRecord::Base
   before_validation_on_create :set_asset_id
 
   alias :to_s :body
-  
+
   def body= val
     write_attribute :message_id, Message.find_or_create_by_validator_id_and_body(validator_id, val).id
   end
-  
+
   def set_asset_id
     write_attribute :asset_id, check.asset_id
+  end
+
+  def self.filter_by(params)
+    if params[:severity].present?
+      scoped_by_severity params[:severity]
+    else
+      scoped
+    end
   end
 end

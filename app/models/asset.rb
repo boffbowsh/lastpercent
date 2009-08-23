@@ -46,6 +46,14 @@ class Asset < ActiveRecord::Base
     !external?
   end
 
+  def self.filter_by(params)
+    if params[:content_type_id].present?
+      scoped_by_content_type_id params[:content_type_id]
+    else
+      scoped
+    end
+  end
+
   define_index do
     # fields
     indexes :url
