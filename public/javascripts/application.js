@@ -13,6 +13,12 @@ $(document).ready(function() {
     return false;
   });
 
+  // open external links in a new window/tab
+  $('a[rel="external"]').live('click', function(){
+    window.open($(this).attr('href'));
+    return false;
+  });
+
   // lightbox setup
   $('a.lightbox').fancybox({
     hideOnContentClick: false,
