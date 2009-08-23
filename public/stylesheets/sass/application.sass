@@ -38,6 +38,11 @@ html
 a 
   :color #2168ac
   
+p
+  :color #2E2E2E
+  :font-size .9em
+  :margin-bottom 20px
+  
 .flash
   +radius_corners(5px)
   :background #D0D0D0
@@ -47,15 +52,13 @@ a
   :-moz-box-shadow 0 1px 1px rgba(0,0,0,0.2)
   :-webkit-box-shadow 0 1px 1px rgba(0,0,0,0.2)
   :text-shadow 0 -1px 1px rgba(0,0,0,0.25)
-  &.success
+  &.success, &.notice
     :background #55A142
     :color #F9F9F9
   &.error
     :background #992927
     :color #F9F9F9
-  &.notice
-    :background #CEC91B
-    :color #3A1F09
+
   
 #column, #header, #footer
   :width 1045px
@@ -144,7 +147,7 @@ a
   #content_top 
     :position relative
     :background #ebebeb url(../images/content_top_bg.gif) bottom repeat-x
-    :padding 20px 40px 50px 40px
+    :padding 20px 40px
     :-moz-border-radius-topleft 15px
     :-webkit-border-top-left-radius 15px
     :-moz-border-radius-topright 15px
@@ -164,41 +167,11 @@ a
       :color #414141
       :width 600px
       :line-height 1.2em
-    #sub_menu
-      :background #DADADA
-      :height 35px
-      :position absolute
-      :left 0
-      :bottom 0
-      :width 100%
-    ul#breadcrumbs
-      :float left
-      :height 35px
-      :background url(../images/breadcrumb_bg.png) right no-repeat
-      li
-        :float left
-        :height 35px
-        :line-height 35px
-        :padding 0 10px 0 25px
-        :font-size .75em
-        :font-weight bold
-        :z-index 9999
-        :background url(../images/breadcrumb_li_bg.png) left no-repeat
-        &.first
-          :padding-left 40px
-          :background url(../images/breadcrumb_repeat_bg.png) left repeat-x
-        &.last
-          :padding-right 20px
-          :background url(../images/breadcrumb_right_arrow.png) left no-repeat
-        a
-          :text-decoration none
-          :color #4D4D4D
-          &:hover
-            :text-decoration underline
+      :margin 0
     ul#submenu
       :position absolute
       :bottom 0
-      :right 0
+      :right 10px
       li
         :display block
         :float left
@@ -206,20 +179,23 @@ a
         a
           :display block
           :float left
-          :background #dfdfdf
+          :background #BCBCBC
           :color #575757
           :padding 10px 8px 10px 12px
-          :font-size .9em
+          :font-size .8em
+          :text-shadow 0 1px 0px #C5C5C5
           +tab
-          :-moz-border-radius-topleft 10px
-          :-webkit-border-top-left-radius 10px
-          :-moz-border-radius-topright 10px
-          :-webkit-border-top-right-radius 10px
+          
           &:hover
-            :background #CDCDCD
+            :color #fff
+            :background #737373
+            :text-shadow 0 1px 0px #494949
         &.active
           a
             :background #fff
+            &:hover
+              :color #575757
+              :text-shadow 0 1px 0px #C5C5C5
         span.count
           :padding 4px
           :background #b8b8b8
@@ -229,13 +205,43 @@ a
           :-moz-border-radius 8px
           :-webkit-border-radius 8px
           :vertical-align middle
-          
+  #infobar
+    :background #DADADA
+    :height 35px
+    :clear both
+    :width 100%
+  ul#breadcrumbs
+    :float left
+    :height 35px
+    :background url(../images/breadcrumb_bg.png) right no-repeat
+    li
+      :float left
+      :height 35px
+      :line-height 35px
+      :padding 0 10px 0 25px
+      :font-size .75em
+      :font-weight bold
+      :z-index 9999
+      :background url(../images/breadcrumb_li_bg.png) left no-repeat
+      &.first
+        :padding-left 40px
+        :background url(../images/breadcrumb_repeat_bg.png) left repeat-x
+      &.last
+        :padding-right 20px
+        :background url(../images/breadcrumb_right_arrow.png) left no-repeat
+      a
+        :text-decoration none
+        :color #4D4D4D
+        &:hover
+          :text-decoration underline
       
 body#home
+  #column 
+    :background none
   #content
     :width 100%
     :padding 0
-    :background url(../images/home_content_bg.jpg) left repeat-y
+    :background #fff url(../images/home_content_bg.jpg) left repeat-y
   #introduction, #search
     :float left
     :padding 65px 40px
@@ -250,7 +256,7 @@ body#home
       :text-shadow 0 2px 0px #fff
     p
       :color #2E2E2E
-      :font-size 1.1em
+      :font-size .9em
       :margin-bottom 20px
     h2
       :font-size 1.2em
@@ -289,7 +295,7 @@ body#home
         :background none
         :border none
         :padding 5px
-        :font-size 2em
+        :font-size 25px
         :width 390px
         :color #4B4B4B
         :letter-spacing -0.05em
@@ -300,9 +306,12 @@ body#home
         :margin 0
 
 body#login_or_signup
+  #column 
+    :background none
   #content
     :padding 0
     :width 100%
+    :background #fff
     .flash
       :margin 10px 10px 0 10px
   #login, #register
@@ -408,6 +417,7 @@ span.current_line
       em span
         :color #ffcf5d
     &.successes
+      :border 0
       em span
         :color #31a11b
     .bar
@@ -417,6 +427,7 @@ span.current_line
       :padding 0
       :bottom 0
       :height 10px
+
 .note
   :font-size 12px
   :font-style italic
@@ -426,3 +437,25 @@ span.current_line
   :margin 5px 0
   :border 2px solid #eee
   :padding 10px
+
+.button
+  :background #E1E1E1 url(../images/button_bg.png) top repeat-x
+  :display inline-block
+  :padding 5px 10px 6px
+  :margin 10px 0
+  :color #575757
+  :text-decoration none
+  :font-weight bold
+  :line-height 1
+  :border 1px solid #D8D8D8
+  :font-size .85em
+  :-moz-border-radius 8px
+  :-webkit-border-radius 8px
+  :-moz-box-shadow 0 3px 1px rgba(0,0,0,0.1)
+  :-webkit-box-shadow 0 3px 1px rgba(0,0,0,0.1)
+  / :text-shadow 0 -1px 1px rgba(0,0,0,0.25)  
+  :position relative
+  :cursor pointer
+  &:hover
+    :background-color #BBBDBD
+
