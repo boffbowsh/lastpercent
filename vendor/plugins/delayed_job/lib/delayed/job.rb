@@ -142,7 +142,7 @@ module Delayed
       end
       
       if self.only_do_job_type
-        sql << ' AND (job_type <= ?)'
+        sql << ' AND (job_type = ?)'
         conditions << only_do_job_type
       end
 
