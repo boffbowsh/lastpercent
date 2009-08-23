@@ -75,15 +75,15 @@ class Asset < ActiveRecord::Base
   end
   
   def errors_count
-    0
+    results.errors.count
   end
   
   def warnings_count
-    0
+    results.warnings.count
   end
   
   def infos_count
-    0
+    results.infos.count
   end
   
   def successes_count
