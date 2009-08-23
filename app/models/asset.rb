@@ -23,7 +23,7 @@ class Asset < ActiveRecord::Base
   after_save :save_local_copy
 
   def enqueue
-    Delayed::Job.enqueue self unless content_type.blank?
+    Delayed::Job.enqueue self, 'Check' unless content_type.blank?
   end
   
   def content_type_id= val

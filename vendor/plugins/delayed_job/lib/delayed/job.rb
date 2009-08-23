@@ -27,7 +27,7 @@ module Delayed
 
     ParseObjectFromYaml = /\!ruby\/\w+\:([^\s]+)/
 
-    cattr_accessor :min_priority, :max_priority
+    cattr_accessor :min_priority, :max_priority, :only_do_job_type
     self.min_priority = nil
     self.max_priority = nil
 
@@ -112,10 +112,13 @@ module Delayed
         raise ArgumentError, 'Cannot enqueue items which do not respond to perform'
       end
     
-      priority = args.first || 0
-      run_at   = args[1]
+      jobtype  = args[0] || object.class.to_s
+      logger.info jobtype.inspect
+      logger.info object.inspect
+      priority = args[1] || 0
+      run_at   = args[2]
 
-      Job.create(:payload_object => object, :priority => priority.to_i, :run_at => run_at)
+      Job.create(:payload_object => object, :priority => priority.to_i, :run_at => run_at, :job_type => jobtype)
     end
 
     # Find a few candidate jobs to run (in case some immediately get locked by others).
@@ -136,6 +139,11 @@ module Delayed
       if self.max_priority
         sql << ' AND (priority <= ?)'
         conditions << max_priority
+      end
+      
+      if self.only_do_job_type
+        sql << ' AND (job_type <= ?)'
+        conditions << only_do_job_type
       end
 
       conditions.unshift(sql)
