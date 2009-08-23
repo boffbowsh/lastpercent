@@ -4,5 +4,20 @@
     = truncate(@asset.to_s, :length => 50)
     = link_to "&#x2192;", @asset.url, :rel => :external
 
-%p
-  = link_to pluralize(@asset.results.count, 'results'), asset_results_path(@asset)
+#summary
+  .box.errors
+    %h3 Errors
+    %em= link_to split_digits(@asset.errors_count), asset_results_path(@asset, :severity => 2)
+    .bar
+  .box.warnings
+    %h3 Warnings
+    %em= link_to split_digits(@asset.warnings_count), asset_results_path(@asset, :severity => 1)
+    .bar
+  .box.successes
+    %h3 Successes
+    %em= link_to split_digits(@asset.infos_count), asset_results_path(@asset, :severity => 0)
+    .bar
+
+- if @asset.body.present?
+  %h3 Content
+  %pre= @asset.body
