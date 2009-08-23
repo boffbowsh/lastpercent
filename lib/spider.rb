@@ -1,6 +1,16 @@
+
 class Spider
   def self.crawl( site )
-    anemone = Anemone.crawl( site.url, :url_limit => Settings.url_limit ) do |core|
+    user_agent = 'LastPercentBot'
+    robot_txt = RobotsTxt.new( site.url, user_agent )
+
+    anemone = Anemone.crawl( site.url, :url_limit => 10, :user_agent => user_agent ) do |core|
+      core.focus_crawl do |page|
+        page.links.each do |link|
+          link.allowed = robot_txt.allowed? link.to_s
+        end
+      end
+
       core.on_every_page do |page|
         asset = site.assets.find_or_initialize_by_url( page.url.to_s )
 
