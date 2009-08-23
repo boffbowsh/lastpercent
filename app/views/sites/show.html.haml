@@ -1,4 +1,5 @@
-%h2= @site
+- content_for :content_top do
+  %h1= @site
 %p
   = link_to pluralize(@site.assets.count, 'asset'), site_assets_path(@site)
   ,

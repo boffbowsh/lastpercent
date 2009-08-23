@@ -1,4 +1,5 @@
-%h2 Assets
+- content_for :content_top do
+  %h1 Assets
 
 - form_tag search_site_assets_path, :method => :get do
   = text_field_tag :query

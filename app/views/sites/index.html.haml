@@ -1,5 +1,5 @@
-%h2
-  Sites
+- content_for :content_top do
+  %h1 Sites
 
 %ul= render @sites
 = will_paginate @sites

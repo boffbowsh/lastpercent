@@ -1,6 +1,8 @@
-%h2 Forgot Password
-%p Fill out the form below and instructions to reset your password will be emailed to you:
+- content_for :content_top do
+  %h1 Change My Password
 
-- form_tag password_resets_path do
-  .field= text_field_tag "email", '', :placeholder => 'Email..', :class => 'email'
-  = submit_tag "Reset my password"
+- clever_form_for :user, :url => password_resets_path, :method => :put do |f|
+  = f.password_field :password
+  = f.password_field :password_confirmation
+
+  = f.submit "Update my password"

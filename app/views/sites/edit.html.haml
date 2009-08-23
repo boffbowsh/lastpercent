@@ -1,6 +1,7 @@
-%h2
-  Editing
-  = @site
+- content_for :content_top do
+  %h1
+    Editing
+    = @site
 
 - clever_form_for @site do |form|
   = render :partial => 'form', :locals => {:form => form}

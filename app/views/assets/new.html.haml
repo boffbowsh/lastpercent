@@ -1,5 +1,5 @@
-%h2
-  New Asset
+- content_for :content_top do
+  %h1 New Asset
 
 - clever_form_for [@site, @asset] do |form|
   = render :partial => 'form', :locals => {:form => form}

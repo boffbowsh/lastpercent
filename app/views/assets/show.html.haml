@@ -1,6 +1,7 @@
-%h2
-  = @asset
-  = link_to "&#x2192;", @asset.url, :rel => :external
+- content_for :content_top do
+  %h1
+    = @asset
+    = link_to "&#x2192;", @asset.url, :rel => :external
 
 %p
   = link_to pluralize(@asset.results.count, 'results'), asset_results_path(@asset)
