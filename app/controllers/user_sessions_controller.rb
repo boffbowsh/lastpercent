@@ -9,14 +9,14 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.new(params[:user_session])
     @user_session.save do |result|
-       if result
-         flash[:notice] = "Login successful!"
-         redirect_back_or_default sites_path
-       else
-         flash.now[:error] = "Please enter a valid email and password"
-         render :action => :new
-       end
-     end
+      if result
+        flash[:notice] = "Login successful!"
+        redirect_back_or_default sites_path
+      else
+        flash.now[:error] = "Please enter a valid email and password"
+        render :action => :new
+      end
+    end
   end
 
   def destroy

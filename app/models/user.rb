@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
 
   acts_as_authentic do |c|
     c.openid_required_fields = [:email, :nickname]
-    c.maintain_sessions = false
+    # c.maintain_sessions = c.openid_identifier
     def attributes_to_save # :doc:
       attrs_to_save = attributes.clone.delete_if do |k, v|
         [ :persistence_token, :perishable_token, :single_access_token, :login_count,

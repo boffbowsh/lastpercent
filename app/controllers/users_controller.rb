@@ -19,11 +19,14 @@ class UsersController < ApplicationController
       if result
         if @user.openid_identifier?
           @user.activate!
+          UserSession.create(:openid_identifier => @user.openid_identifier)
+          flash[:notice] = "You are now logged in!"
+          redirect_to login_path
         else
           @user.deliver_activation_instructions!
+          flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
+          redirect_to login_path
         end
-        flash[:notice] = "Your account has been created. Please check your e-mail for your account activation instructions!"
-        redirect_to login_path
       else
         render :action => :new
       end
