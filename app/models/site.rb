@@ -77,6 +77,10 @@ class Site < ActiveRecord::Base
   def spider
     Spider.crawl self
   end
+  
+  def is_being_crawled?
+    ( !self.spider_started_at.nil? && self.spider_ended_at.nil? && self.spider_failed_at.nil? )
+  end
 
   alias :perform :spider
 end
