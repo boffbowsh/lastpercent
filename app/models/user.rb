@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
   end
 
   def to_s
-    first_name
+    first_name.present? ? first_name : email
   end
 
   def name
