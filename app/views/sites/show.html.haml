@@ -3,9 +3,23 @@
 
 - content_for :content_top do
   %h1= @site
-%p
-  Assets:
-  = link_to @site.assets.count, site_assets_path(@site), :class => 'assets_count'
-%p
-  Errors:
-  = link_to @site.results.errors.count, site_results_path(@site), :class => 'errors_count'
+  
+#summary
+  .box.assets
+    %h3 Assets
+    %em= link_to split_digits(@site.assets.count), site_assets_path(@site)
+    .bar
+  .box.errors
+    %h3 Errors
+    %em= link_to split_digits(@site.errors_count), site_results_path(@site)
+    .bar
+  .box.warnings
+    %h3 Warnings
+    %em= link_to split_digits(@site.warnings_count), site_results_path(@site)
+    .bar
+  .box.successes
+    %h3 Successes
+    %em= link_to split_digits(@site.successes_count), site_results_path(@site)
+    .bar
+
+
