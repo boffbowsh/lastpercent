@@ -33,6 +33,10 @@ class Site < ActiveRecord::Base
     results.warnings.count
   end
   
+  def infos_count
+    results.infos.count
+  end
+  
   def successes_count
     0
   end
