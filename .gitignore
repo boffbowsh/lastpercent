@@ -13,3 +13,6 @@ coverage.data
 config/*.sphinx.conf
 db/sphinx/*
 *.sassc
+config/*.sphinx.conf
+db/sphinx/*
+
