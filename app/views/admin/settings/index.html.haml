@@ -1,0 +1,12 @@
+- content_for :content_top do
+  %h1 Settings
+
+- form_tag admin_update_settings_path do
+  - @settings.each do |setting|
+    .form_text_field
+      .label
+        = label :settings, setting.first.humanize
+
+      .input
+        = text_field :settings, setting.first, :value => setting.second
+  = submit_tag 'Save'

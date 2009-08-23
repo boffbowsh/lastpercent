@@ -4,14 +4,14 @@ class Asset < ActiveRecord::Base
   belongs_to :content_type
   has_many :checks
   has_many :results
+  
+  delegate :validators, :to => :content_type
 
-  delegate :validators, :mime_type, :to => :content_type
-
-  has_and_belongs_to_many :links, 
-                          :class_name => "Asset",
-                          :join_table => "links", 
-                          :foreign_key => "from_asset_id",
-                          :association_foreign_key => "to_asset_id"
+  has_and_belongs_to_many :links,
+    :class_name => "Asset",
+    :join_table => "links",
+    :foreign_key => "from_asset_id",
+    :association_foreign_key => "to_asset_id"
 
   validates_format_of :url, :with => URI::regexp(%w(http https))
   validates_uniqueness_of :url, :scope => :site_id
@@ -20,8 +20,18 @@ class Asset < ActiveRecord::Base
 
   after_update :enqueue
 
+  after_save :save_local_copy
+
   def enqueue
-    Delayed::Job.enqueue self
+    Delayed::Job.enqueue self unless content_type.blank?
+  end
+  
+  def content_type_id= val
+    write_attribute(:content_type_id, val)
+  end
+  
+  def mime_type
+    content_type.try(:mime_type)
   end
 
   def create_checks
@@ -60,5 +70,41 @@ class Asset < ActiveRecord::Base
 
     # attributes
     has :created_at, :external, :response_status, :response_time
+  end
+
+  def local_storage_filename
+    thousands = (id/1000).to_i * 1000
+    File.join(RAILS_ROOT,'cached_assets',thousands.to_s,id.to_s.rjust(4,'0'))
+  end
+
+  def body
+    @body ||= read_local_copy
+  end
+
+  def body= val
+    @body = val
+  end
+
+  def save_local_copy
+    filename = local_storage_filename
+    FileUtils.mkdir_p File.dirname(filename)
+    open(filename,'w') do |f|
+      f.write @body
+    end
+  end
+
+  def read_local_copy
+    filename = local_storage_filename
+    if File.exists? filename
+      open(filename,'r') do |f|
+        @body = f.read
+      end
+    else
+      @body = nil
+    end
+  end
+
+  def destroy_local_copy!
+    File.unlink local_storage_filename
   end
 end

@@ -1,0 +1,1 @@
+Settings.url_limit = 70
