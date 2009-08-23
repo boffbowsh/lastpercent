@@ -63,6 +63,8 @@ class Asset < ActiveRecord::Base
   def self.filter_by(params)
     if params[:content_type_id].present?
       scoped_by_content_type_id params[:content_type_id]
+    elsif params[:response_status].present?
+      scoped_by_response_status params[:response_status]
     else
       scoped
     end
