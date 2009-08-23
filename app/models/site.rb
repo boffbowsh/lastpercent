@@ -23,6 +23,14 @@ class Site < ActiveRecord::Base
   def errors_count
     results.errors.count
   end
+  
+  def warnings_count
+    results.warnings.count
+  end
+  
+  def successes_count
+    0
+  end
 
   after_create :enqueue
 
