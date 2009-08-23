@@ -16,6 +16,8 @@ class User < ActiveRecord::Base
 
   is_paranoid
 
+  attr_protected :admin
+
   has_many :sites, :dependent => :destroy
 
   def map_openid_registration(registration)
