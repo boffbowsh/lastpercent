@@ -6,6 +6,7 @@ class Asset < ActiveRecord::Base
   has_many :results, :dependent => :destroy
   
   delegate :validators, :to => :content_type
+  delegate :user, :to => :site
 
   has_and_belongs_to_many :links,
     :class_name => "Asset",
@@ -21,6 +22,14 @@ class Asset < ActiveRecord::Base
   after_update :enqueue
 
   after_save :save_local_copy
+  
+  def initialize
+    destroy_local_copy!
+    super
+  end
+
+  named_scope :has_content_type, :conditions => 'content_type_id IS NOT NULL'
+  named_scope :has_no_content_type, :conditions => 'content_type_id IS NULL'
 
   def enqueue
     Delayed::Job.enqueue self, 'Check' unless content_type.blank?
@@ -102,11 +111,43 @@ class Asset < ActiveRecord::Base
 
   def local_storage_filename
     thousands = (id/1000).to_i * 1000
-    File.join(RAILS_ROOT,'cached_assets',thousands.to_s,id.to_s.rjust(4,'0'))
+    File.join(RAILS_ROOT,'cached_assets',thousands.to_s.ljust(4,'0'),id.to_s.rjust(4,'0'))
   end
 
   def body
     @body ||= read_local_copy
+  end
+
+  def excerpt(line_no, column_no = nil, range = 10)
+    if body
+      count = 1
+      excerpt = ""
+      content = body
+      content.each_line do |l|
+        if count >= (line_no - range) && count <= (line_no + range)
+          if count == line_no
+            if column_no
+              column_no -= 1
+              l[column_no] = "STARTCOLSPANHERE#{l[column_no,1].to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDCOLSPANHERE"
+              l = "#{count}: <span class='current_line'>#{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}</span>"
+              l.gsub!('STARTCOLSPANHERE', "<span class='current_column'>")
+              l.gsub!('ENDCOLSPANHERE', "</span>")
+              excerpt << l
+            else
+              l = "#{count}: STARTLINESPANHERE#{l.rstrip.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDLINESPANHERE\n"
+              l.gsub!('STARTLINESPANHERE', "<span class='current_line'>")
+              l.gsub!('ENDLINESPANHERE', "</span>")
+              excerpt << l
+            end
+          else
+            excerpt << "#{count}: #{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}"
+          end
+        end
+        count += 1
+      end
+      # excerpt.gsub("\n", "<br />\n")
+      excerpt
+    end
   end
 
   def body= val
@@ -135,7 +176,7 @@ class Asset < ActiveRecord::Base
   end
 
   def destroy_local_copy!
-    File.unlink local_storage_filename
+    File.unlink local_storage_filename if File.exist? local_storage_filename
   end
 
   def cache_data?

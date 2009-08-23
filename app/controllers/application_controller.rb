@@ -27,6 +27,10 @@ class ApplicationController < ActionController::Base
     access_denied('You must be logged in to do that!') unless current_user
   end
 
+  def require_admin
+    access_denied('Admin Users Only') unless current_user.admin?
+  end
+
   def store_location
     session[:return_to] = request.request_uri
   end

@@ -2,5 +2,10 @@
 - content_for :content_top do
   %h1 Results
 
-%ul= render @results
-= will_paginate @results
+- if @results.any?
+  %ul= render @results
+  = will_paginate @results
+- else
+  %p.empty
+    No results can be found!
+

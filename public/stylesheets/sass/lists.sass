@@ -25,13 +25,9 @@
   li
     +clearfix
     :padding 10px
-    &.odd
-      :background #ececec
+    :background #ececec
     &.even
       :background #f6f6f6
-
-.asset_list
-  li
     h3
       :float left
       :font-weight bold
@@ -52,15 +48,15 @@
         :margin 0 2px 
       .slow
         :background url(../images/icons/clock.png)
-
-    span.speed
-      :font-size .8em
-      :color #B0B0B0
-      :font-style italic
-      :line-height 1.3em
-      :margin-left 5px
+        span.speed
+          :font-size .8em
+          :color #B0B0B0
+          :font-style italic
+          :line-height 1.3em
+          :margin-left 5px
     p.results
       :float right
+      :margin 0
       a, span, abbr
         :background #fff
         :background-position 5px center
@@ -85,6 +81,9 @@
           :background-image url(../images/icons/tick.png)
         &.infos
           :background-image url(../images/icons/question-balloon.png)
+        &.assets
+          :color #545454
+          :background-image url(../images/icons/document-copy.png)
         &.external
           :background #E2E2E2
           :color #B9B9B9
@@ -95,7 +94,4 @@
         &.success_codes
           :display none
         em
-          :font-style normal
-        
-        
-          
+          :font-style normal    
