@@ -34,8 +34,9 @@ class Spider
         end
       end
       site.update_attribute(:spider_ended_at, Time.now)
-    rescue
-      site.update_attribute(:spider_failded_at, Time.now)
+    rescue Exception => e
+      puts e
+      site.update_attribute(:spider_failed_at, Time.now)
     end
   end
 end
