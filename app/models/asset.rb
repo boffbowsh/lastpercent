@@ -87,9 +87,8 @@ class Asset < ActiveRecord::Base
   end
   
   def valid?
-    infos_count == 0 and warnings_count == 0 and errors_count == 0
+    infos_count == 0 and warnings_count == 0 and errors_count == 0 and not /^[4|5|3]/.match(response_status.to_s)
   end
-    
 
   define_index do
     # fields

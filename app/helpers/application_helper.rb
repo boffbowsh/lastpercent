@@ -37,4 +37,19 @@ module ApplicationHelper
       end
     end
   end
+  
+  def asset_response_code(asset)
+    if asset.response_status
+      case asset.response_status.to_s
+      when /^[4|5]/
+        class_name = 'error_codes'
+      when /^[3]/
+        class_name = 'redirection_codes'
+      else
+        class_name = 'success_codes'
+      end
+    
+      link_to(asset.response_status, site_assets_path(asset.site, :response_status => asset.response_status), :class => class_name)    
+    end
+  end
 end
