@@ -38,7 +38,7 @@ class Site < ActiveRecord::Base
   end
   
   def successes_count
-    assets_without_errors.count
+    assets_without_errors.size
   end
 
   # TODO: REWRITE ME OMG REWRITE ME
