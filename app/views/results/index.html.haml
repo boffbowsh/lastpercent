@@ -1,6 +1,6 @@
-%h2
-  = link_to parent_object, parent_object
-  Results
+- breadcrumbs(link_to(@parent_object.class.to_s, sites_path), link_to(@parent_object, @parent_object), 'Results')
+- content_for :content_top do
+  %h1 Results
 
 %ul= render @results
 = will_paginate @results

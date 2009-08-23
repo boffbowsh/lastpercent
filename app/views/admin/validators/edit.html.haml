@@ -1,6 +1,7 @@
-%h2
-  Editing
-  = @validator
+- content_for :content_top do
+  %h1
+    Editing
+    = @validator
 
 - clever_form_for [:admin, @validator] do |form|
   = render :partial => 'form', :locals => {:form => form}

@@ -1,2 +1,5 @@
-%h2 Workers
-= render @workers
+- content_for :content_top do
+  %h1
+    Workers
+
+%ul= render @workers

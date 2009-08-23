@@ -1,6 +1,8 @@
-%h2
-  = @asset
-  = link_to "&#x2192;", @asset.url, :rel => :external
+- breadcrumbs(link_to('Sites', sites_path), link_to(@asset.site, @asset.site), link_to('Assets', site_assets_path(@asset.site)), @asset)
+- content_for :content_top do
+  %h1
+    = @asset
+    = link_to "&#x2192;", @asset.url, :rel => :external
 
 %p
   = link_to pluralize(@asset.results.count, 'results'), asset_results_path(@asset)

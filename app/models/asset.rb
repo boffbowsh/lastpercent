@@ -23,7 +23,7 @@ class Asset < ActiveRecord::Base
   after_save :save_local_copy
 
   def enqueue
-    Delayed::Job.enqueue self unless content_type.blank?
+    Delayed::Job.enqueue self, 'Check' unless content_type.blank?
   end
   
   def content_type_id= val
@@ -45,14 +45,18 @@ class Asset < ActiveRecord::Base
   alias :perform :create_checks
 
   def to_s
-    url
+    internal? && path.present? ? path : url
   end
-
+  
+  def path
+    url.gsub(site.url, '')
+  end
+  
   def checkable?
-    internal && content_type_id.present?
+    internal && content_type_id
   end
 
-  def internal
+  def internal?
     !external?
   end
 
@@ -62,6 +66,28 @@ class Asset < ActiveRecord::Base
     else
       scoped
     end
+  end
+  
+  def slow?
+    if response_time
+      response_time > 2000
+    end
+  end
+  
+  def errors_count
+    results.errors.count
+  end
+  
+  def warnings_count
+    results.warnings.count
+  end
+  
+  def infos_count
+    results.infos.count
+  end
+  
+  def successes_count
+    0
   end
 
   define_index do

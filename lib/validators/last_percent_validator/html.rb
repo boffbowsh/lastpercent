@@ -3,7 +3,7 @@ require 'w3c_validators'
 class LastPercentValidator::HTML < LastPercentValidator::Base
     
   def run
-    validator = W3CValidators::MarkupValidator.new(:validator_uri => ValidatorConfig['html']['uri'])
+    validator = W3CValidators::MarkupValidator.new(:validator_uri => Settings.html_uri)
     #results = @validator.validate_file(fp)
     results = validator.validate_text(@asset.body)
     

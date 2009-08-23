@@ -10,12 +10,13 @@
         var AUTH_TOKEN=#{form_authenticity_token.inspect};
     = stylesheet_link_tag('application')
     = stylesheet_link_tag('print', :media => :print)
-    = javascript_include_tag 'jquery', 'application', :cache => true
+    = javascript_include_tag 'jquery', 'jquery.fancybox', 'application', :cache => true
     - if iphone?
       %meta{:name => "viewport", :content => "width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"}
       = stylesheet_link_tag 'iphone'
       %link{:rel => "apple-touch-icon", :href => "/images/home-icon.png"}
     %title Last Percent
+    = yield(:head)
   %body{:id => @body_id || nil}
     #header
       %h1= link_to t('app.title'), root_path, :rel => :home
@@ -45,7 +46,8 @@
     #column
       - if @content_for_content_top.present?
         #content_top
-          = yield :content_top 
+          = yield :content_top
+          = yield :breadcrumbs
       #content.clearfix
         - flash.each do |key, msg|
           %div{:class => "flash #{key}"}= msg

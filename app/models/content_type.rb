@@ -10,4 +10,10 @@ class ContentType < ActiveRecord::Base
   def to_s
     mime_type
   end
+  
+  def to_pretty_s
+    mime_type.split('/')[1].gsub(/\+/, '-').downcase
+  rescue
+    mime_type
+  end
 end

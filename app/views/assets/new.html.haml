@@ -1,5 +1,6 @@
-%h2
-  New Asset
+- breadcrumbs(link_to('Sites', sites_path), link_to(@asset.site, @asset.site), link_to('Assets', site_assets_path(@asset.site)), 'New Asset')
+- content_for :content_top do
+  %h1 New Asset
 
 - clever_form_for [@site, @asset] do |form|
   = render :partial => 'form', :locals => {:form => form}

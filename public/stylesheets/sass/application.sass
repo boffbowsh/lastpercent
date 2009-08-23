@@ -1,7 +1,3 @@
-@import reset.sass
-@import clearfix.sass
-@import forms.sass
-
 =hide-text
   :overflow hidden
   :text-indent -9999em
@@ -26,7 +22,13 @@
 =15_radius_corners
   :-moz-border-radius 15px
   :-webkit-border-radius 15px
-  
+
+@import reset.sass
+@import clearfix.sass
+@import forms.sass
+@import lists.sass
+@import fancybox.sass
+
 html
   :background #e9e9e9 url(../images/body_bg.gif) top repeat-x
   :font 1em Arial, sans-serif
@@ -129,22 +131,19 @@ a
 
 #column
   :background #fff
-  :-moz-border-radius 15px
-  :-webkit-border-radius 15px
-  :-moz-border-radius 15px
-  :-webkit-border-radius 15px
+  +radius_corners(15px)
   
   #content
-    :width 1005px
-    :padding 20px
-    +15_radius_corners
+    :width 965px
+    :padding 20px 40px
+    +radius_corners(15px)
     :-moz-box-shadow 0 2px 3px rgba(0,0,0,0.1)
     :-webkit-box-shadow 0 2px 3px rgba(0,0,0,0.1)
   
   #content_top 
     :position relative
-    :background #ebebeb url(../images/content_top_bg.gif) top repeat-x
-    :padding 20px 40px
+    :background #ebebeb url(../images/content_top_bg.gif) bottom repeat-x
+    :padding 20px 40px 50px 40px
     :-moz-border-radius-topleft 15px
     :-webkit-border-top-left-radius 15px
     :-moz-border-radius-topright 15px
@@ -163,6 +162,32 @@ a
       :color #414141
       :width 600px
       :line-height 1.2em
+    ul#breadcrumbs
+      :position absolute
+      :left 0
+      :bottom 0
+      :height 35px
+      :background url(../images/breadcrumb_bg.png) right no-repeat
+      li
+        :float left
+        :height 35px
+        :line-height 35px
+        :padding 0 10px 0 25px
+        :font-size .75em
+        :font-weight bold
+        :z-index 9999
+        :background url(../images/breadcrumb_li_bg.png) left no-repeat
+        &.first
+          :padding-left 40px
+          :background url(../images/breadcrumb_repeat_bg.png) left repeat-x
+        &.last
+          :padding-right 20px
+          :background url(../images/breadcrumb_right_arrow.png) left no-repeat
+        a
+          :text-decoration none
+          :color #4D4D4D
+          &:hover
+            :text-decoration underline
     ul#submenu
       :position absolute
       :bottom 0
@@ -285,5 +310,42 @@ body#login_or_signup
   #register
     :border-left 1px solid #E1E1E1
   
+.pagination
+  :padding 0
+  :margin 10px 0
+
+  a
+    :font-weight bold
+    :padding 4px 8px
+    :background #DDD
+    :text-decoration none
+    :color #363636
+    :outline none
+    :-moz-border-radius .4em
+    :border-radius .4em
+    :font-size .7em
+
+  span
+    :font-weight bold
+    :padding 4px 8px
+    :background #E4E4E4
+    :text-decoration none
+    :color #3E3E3E
+    :outline none
+    :-moz-border-radius .4em
+    :border-radius .4em
+    :font-size .7em
+
+    &.current
+      :color #fff
+      :background #0085C1
+    &.disabled
+      :background #dddddd
+      :color #9e9e9e
+
+  a
+    &:hover, &:active
+      :background #1389CE
+      :color #fff
 
       

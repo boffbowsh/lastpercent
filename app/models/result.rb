@@ -13,6 +13,10 @@ class Result < ActiveRecord::Base
 
   before_validation_on_create :set_asset_id
 
+  named_scope :errors, :conditions => {:severity => 2}
+  named_scope :warnings, :conditions => {:severity => 1}
+  named_scope :infos, :conditions => {:severity => 0}
+
   alias :to_s :body
 
   def body= val

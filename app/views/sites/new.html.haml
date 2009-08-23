@@ -1,5 +1,6 @@
-%h2
-  New Site
+- breadcrumbs(link_to('Sites', sites_path), 'New Site')
+- content_for :content_top do
+  %h1 New Site
 
 - clever_form_for @site do |form|
   = render :partial => 'form', :locals => {:form => form}

@@ -11,7 +11,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
        if result
          flash[:notice] = "Login successful!"
-         redirect_back_or_default root_path
+         redirect_back_or_default sites_path
        else
          flash.now[:error] = "Please enter a valid email and password"
          render :action => :new

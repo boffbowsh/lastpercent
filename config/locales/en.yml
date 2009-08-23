@@ -19,7 +19,7 @@ en:
   pages:
     home:
       title: Welcome to Last Percent
-      intro: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa."
+      intro: "Sanity checking for Web Apps.<br />Sanity saving for Project Managers."
       screenshots:
         intro: A few screenshots 
         overview: This is a test screenshot

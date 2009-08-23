@@ -9,4 +9,8 @@ class Worker < ActiveRecord::Base
   
   aasm_event(:enable) { transitions :to => :enabled, :from => :disabled }
   aasm_event(:disable) { transitions :to => :disabled, :from => :enabled }
+
+  def to_s
+    name
+  end
 end

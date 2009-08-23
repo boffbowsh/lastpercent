@@ -1,0 +1,1 @@
+ERROR_SEVERITY = LastPercentValidator::Base::SEVERITY

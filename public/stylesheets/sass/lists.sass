@@ -1,0 +1,87 @@
+
+.list_dl
+  +clearfix
+  dt
+    :float left
+    :background #d3d3d3 url(../images/dt_bg.png) bottom repeat-x
+    :font-size .7em
+    :font-weight bold
+    :color #3F3F3F
+    :padding 10px
+    +tab
+    :cursor default
+  dd
+    :display none
+    
+.asset_list_dl
+  dt.assets
+    :width 555px
+    :margin-right 5px
+  dt.results
+    :width 365px
+    :text-align right
+    
+.list 
+  li
+    +clearfix
+    :padding 10px
+    &.odd
+      :background #ececec
+    &.even
+      :background #f6f6f6
+
+.asset_list
+  li
+    h3
+      :float left
+      :font-weight bold
+      :font-size .8em
+      :width 550px
+      a
+        :color #4c4a4a
+        :text-decoration none
+        :float left
+      .slow, .external
+        :display block
+        :height 16px
+        :width 16px
+        :float left
+        +hide-text
+        :margin 0 2px 
+      .slow
+        :background url(../images/icons/clock.png)
+      .external
+        :background url(../images/icons/shortcut.png)
+    span.speed
+      :font-size .8em
+      :color #B0B0B0
+      :font-style italic
+    p.results
+      :float right
+      a, span
+        :background #fff
+        :background-position 5px center
+        :background-repeat no-repeat
+        :padding 4px 4px 4px 25px
+        :font-size .75em
+        :font-weight bold
+        +radius_corners(5px)
+        :text-decoration none
+        &.content_type 
+          :padding-left 4px
+          :color #A8A8A8
+        &.errors
+          :color #bd1414
+          :background-image url(../images/icons/cross-circle.png)
+        &.warnings
+          :color #f3b700
+          :background-image url(../images/icons/exclamation.png)
+        &.success
+          :color #119238
+          :background-image url(../images/icons/tick.png)
+        &.infos
+          :background-image url(../images/icons/question-balloon.png)
+        em
+          :font-style normal
+        
+          

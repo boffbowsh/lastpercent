@@ -1,7 +1,11 @@
-%h2 Change My Password
+- breadcrumbs 'Forgot Password'
+- content_for :content_top do
+  %h1 Forgot Password
 
-- clever_form_for User.new, :url => password_resets_path, :method => :put do |f|
-  = f.password_field :password
-  = f.password_field :password_confirmation
-
-  = f.submit "Update my password"
+- form_tag password_resets_path do
+  .form_text_field
+    .label
+      = label :email, "Fill out the form below and instructions to reset your password will be emailed to you:"
+    .input
+      = text_field_tag :email
+  = submit_tag "Reset my password"

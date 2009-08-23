@@ -4,14 +4,12 @@
   
   %h2= t('pages.home.screenshots.intro', :default => 'A few screenshots')
   %ul
-    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
-    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
-    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg', :rel => 'group', :class => 'lightbox')
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg', :rel => 'group', :class => 'lightbox')
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg', :rel => 'group', :class => 'lightbox')
 
 #search
   = render 'sites/search'
   %p.login
     = t('page.home.login_small', :default => 'Already have an account?')
     = link_to t('page.home.login_link', :default => 'Sign in'), login_path
-  
-  

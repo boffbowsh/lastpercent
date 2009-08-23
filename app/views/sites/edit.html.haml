@@ -1,6 +1,8 @@
-%h2
-  Editing
-  = @site
+- breadcrumbs(link_to('Sites', sites_path), link_to(@site, @site), 'Edit')
+- content_for :content_top do
+  %h1
+    Editing
+    = @site
 
 - clever_form_for @site do |form|
   = render :partial => 'form', :locals => {:form => form}
