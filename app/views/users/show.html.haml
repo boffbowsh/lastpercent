@@ -1,4 +1,6 @@
-%h2= @user
+- breadcrumbs(@user)
+- content_for :content_top do
+  %h1= @user
 
 %p
   = link_to "Edit User", edit_user_path

@@ -1,5 +1,6 @@
+- breadcrumbs 'Change Password'
 - content_for :content_top do
-  %h1 Change My Password
+  %h1 Change Password
 
 - clever_form_for :user, :url => password_resets_path, :method => :put do |f|
   = f.password_field :password

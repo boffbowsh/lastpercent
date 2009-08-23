@@ -1,2 +1,3 @@
+- breadcrumbs(link_to(@parent_object.class.to_s, sites_path), link_to(@parent_object, @parent_object), link_to('Results', polymorphic_path([@parent_object, Result.new])), @result)
 - content_for :content_top do
   %h1= @result

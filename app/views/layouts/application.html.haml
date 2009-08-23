@@ -48,7 +48,6 @@
         #content_top
           = yield :content_top
           = yield :breadcrumbs
-                
       #content.clearfix
         - flash.each do |key, msg|
           %div{:class => "flash #{key}"}= msg

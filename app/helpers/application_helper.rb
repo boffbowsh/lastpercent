@@ -17,4 +17,18 @@ module ApplicationHelper
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
+
+  def breadcrumbs(*args)
+    links = [link_to('Home', root_path)]
+    links = links + args
+    content_for :breadcrumbs do
+      content_tag :ul, :id => 'breadcrumbs' do
+        returning String.new do |s|
+          links.each do |link|
+            s << content_tag(:li, link)
+          end
+        end
+      end
+    end
+  end
 end
