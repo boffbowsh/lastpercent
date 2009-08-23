@@ -119,33 +119,35 @@ class Asset < ActiveRecord::Base
   end
 
   def excerpt(line_no, column_no = nil, range = 10)
-    count = 1
-    excerpt = ""
-    content = body
-    content.each_line do |l|
-      if count >= (line_no - range) && count <= (line_no + range)
-        if count == line_no
-          if column_no
-            column_no -= 1
-            l[column_no] = "STARTCOLSPANHERE#{l[column_no,1].to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDCOLSPANHERE"
-            l = "#{count}: <span class='current_line'>#{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}</span>"
-            l.gsub!('STARTCOLSPANHERE', "<span class='current_column'>")
-            l.gsub!('ENDCOLSPANHERE', "</span>")
-            excerpt << l
+    if body
+      count = 1
+      excerpt = ""
+      content = body
+      content.each_line do |l|
+        if count >= (line_no - range) && count <= (line_no + range)
+          if count == line_no
+            if column_no
+              column_no -= 1
+              l[column_no] = "STARTCOLSPANHERE#{l[column_no,1].to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDCOLSPANHERE"
+              l = "#{count}: <span class='current_line'>#{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}</span>"
+              l.gsub!('STARTCOLSPANHERE', "<span class='current_column'>")
+              l.gsub!('ENDCOLSPANHERE', "</span>")
+              excerpt << l
+            else
+              l = "#{count}: STARTLINESPANHERE#{l.rstrip.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDLINESPANHERE\n"
+              l.gsub!('STARTLINESPANHERE', "<span class='current_line'>")
+              l.gsub!('ENDLINESPANHERE', "</span>")
+              excerpt << l
+            end
           else
-            l = "#{count}: STARTLINESPANHERE#{l.rstrip.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}ENDLINESPANHERE\n"
-            l.gsub!('STARTLINESPANHERE', "<span class='current_line'>")
-            l.gsub!('ENDLINESPANHERE', "</span>")
-            excerpt << l
+            excerpt << "#{count}: #{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}"
           end
-        else
-          excerpt << "#{count}: #{l.to_s.gsub(/[\"><]|&(?!([a-zA-Z]+|(#\d+));)/) { |special| ERB::Util::HTML_ESCAPE[special] }}"
         end
+        count += 1
       end
-      count += 1
+      # excerpt.gsub("\n", "<br />\n")
+      excerpt
     end
-    # excerpt.gsub("\n", "<br />\n")
-    excerpt
   end
 
   def body= val
