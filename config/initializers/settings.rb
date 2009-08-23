@@ -4,5 +4,5 @@ begin
   Settings.html_uri = 'http://127.0.0.1/cgi-bin/check'
   Settings.feed_uri = 'http://127.0.0.1/cgi-bin/check.cgi'
 rescue
-  logger.error "You don't have a settings table yet, rake db:migrate!"
+  RAILS_DEFAULT_LOGGER.error "You don't have a settings table yet, rake db:migrate!"
 end
