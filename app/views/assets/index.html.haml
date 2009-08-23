@@ -4,8 +4,19 @@
 - form_tag search_site_assets_path, :method => :get do
   = text_field_tag :query
   = submit_tag 'Search'
+  
+= will_paginate @assets
 
-%ul= render :partial => 'asset', :collection =>  @assets
+%dl.list_dl.asset_list_dl
+  %dt.assets Assets
+  %dd A list of assets that have been found on your site.
+  %dt.results Results
+  %dd The results for each asset.
+  
+  
+%ul.list.asset_list
+  = render :partial => 'asset', :collection =>  @assets
+
 = will_paginate @assets
 
 - form_tag site_assets_path, :method => :get do

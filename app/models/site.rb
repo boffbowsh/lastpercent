@@ -16,6 +16,14 @@ class Site < ActiveRecord::Base
     name.blank? ? url : name
   end
 
+  def assets_count
+    assets.count
+  end
+
+  def errors_count
+    results.errors.count
+  end
+
   after_create :enqueue
 
   def enqueue

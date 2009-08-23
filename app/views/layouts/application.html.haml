@@ -16,6 +16,7 @@
       = stylesheet_link_tag 'iphone'
       %link{:rel => "apple-touch-icon", :href => "/images/home-icon.png"}
     %title Last Percent
+    = yield(:head)
   %body{:id => @body_id || nil}
     #header
       %h1= link_to t('app.title'), root_path, :rel => :home

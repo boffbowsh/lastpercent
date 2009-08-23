@@ -3,3 +3,5 @@
 
 %ul= render @sites
 = will_paginate @sites
+
+%p= link_to "New Site", new_site_path, :class => 'button'
