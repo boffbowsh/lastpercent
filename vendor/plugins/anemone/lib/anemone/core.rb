@@ -145,14 +145,20 @@ module Anemone
         # puts "QSize [#{link_queue.size}] QWaiting [#{link_queue.num_waiting}] QEmpty [#{link_queue.empty?}]"
         # puts " TSize [#{@tentacles.size}] PWaiting [#{page_queue.num_waiting}] PEmpty [#{page_queue.empty?}]"
         # if we are done with the crawl, tell the threads to end
-        if link_queue.empty? && page_queue.empty?
-          until link_queue.num_waiting == @tentacles.size
-            Thread.pass
-          end
+        
+        if (link_queue.empty? && page_queue.empty?) || Anemone.times_up?
+          if  Anemone.times_up?
+             @tentacles.each { |t| puts t.inspect; t.kill }
+             break
+          else            
+            until link_queue.num_waiting == @tentacles.size
+              Thread.pass
+            end
           
-          if page_queue.empty?
-            @tentacles.size.times { |i| link_queue.enq(:END) }
-            break
+            if page_queue.empty?
+              @tentacles.size.times { |i| link_queue.enq(:END) }
+              break
+            end
           end
         end
     
@@ -216,6 +222,6 @@ module Anemone
       @skip_link_patterns.each { |p| return true if link.path =~ p}
       return false
     end
-    
+        
   end
 end
