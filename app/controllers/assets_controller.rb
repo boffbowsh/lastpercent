@@ -3,6 +3,7 @@ class AssetsController < ApplicationController
   
   make_resourceful do
     actions :all, :except => [:edit, :update]
+    collection_actions :search
     belongs_to :site
 
     publish :xml, :json, :attributes => [:id, :url]
