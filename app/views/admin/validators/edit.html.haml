@@ -1,0 +1,7 @@
+%h2
+  Editing
+  = @validator
+
+- clever_form_for [:admin, @validator] do |form|
+  = render :partial => 'form', :locals => {:form => form}
+  = form.submit

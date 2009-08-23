@@ -1,6 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :workers
+    admin.resources :validators
   end
 
   map.resources :sites, :shallow => true do |site|
