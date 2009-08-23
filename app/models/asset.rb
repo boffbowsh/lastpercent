@@ -53,7 +53,7 @@ class Asset < ActiveRecord::Base
   end
   
   def checkable?
-    internal && content_type_id
+    internal? && content_type_id
   end
 
   def internal?
