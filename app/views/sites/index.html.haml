@@ -4,7 +4,7 @@
   %p.intro= t('site.index.intro')
 
 - if @sites.any?
-  %ul.list= render @sites
+  %ul.list.sites_list= render @sites
   = will_paginate @sites
   %p= link_to t('site.navigation.add', :default => "Check a site"), new_site_path, :class => 'button'
 - else
