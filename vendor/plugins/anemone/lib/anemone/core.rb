@@ -126,7 +126,8 @@ module Anemone
         links_to_follow(page).each do |link|
           # TODO : Add support for https links
           # Only follow http links
-          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s )
+          # Only fetch url_limit number on links
+          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s ) && ( Anemone.options.url_limit -= 1) > 0
           @pages[link] = nil
         end
 
@@ -140,10 +141,10 @@ module Anemone
           @pages[aka].add_alias!(page.url)
         end
         
-        # if we are done with the crawl, tell the threads to end
 
         # puts "QSize [#{link_queue.size}] QWaiting [#{link_queue.num_waiting}] QEmpty [#{link_queue.empty?}]"
         # puts " TSize [#{@tentacles.size}] PWaiting [#{page_queue.num_waiting}] PEmpty [#{page_queue.empty?}]"
+        # if we are done with the crawl, tell the threads to end
         if link_queue.empty? && page_queue.empty?
           until link_queue.num_waiting == @tentacles.size
             Thread.pass

@@ -35,6 +35,12 @@ module Anemone
     #no delay between requests by default
     Anemone.options.delay ||= 0
     
+    # By default only fetch 10 urls
+    Anemone.options.url_limit ||= 70
+    
+    # By default stop the spider after 30 seconds
+    Anemone.options.time_limit ||= 30
+    
     #use a single thread if a delay was requested
     if(Anemone.options.delay != 0)
       Anemone.options.threads = 1
