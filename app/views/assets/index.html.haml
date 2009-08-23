@@ -7,3 +7,6 @@
 %ul= render :partial => 'asset', :collection =>  @assets
 = will_paginate @assets
 
+- form_tag site_assets_path, :method => :get do
+  = select_tag :content_type_id, options_from_collection_for_select(@site.content_types, :id, :to_s, params[:content_type_id].to_i)
+  = submit_tag 'Filter'
