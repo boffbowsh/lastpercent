@@ -10,6 +10,7 @@ class Result < ActiveRecord::Base
 
   delegate :body, :to => :message
   delegate :validator_id, :validator, :to => :check
+  delegate :user, :to => :asset
 
   before_validation_on_create :set_asset_id
 

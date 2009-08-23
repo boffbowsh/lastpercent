@@ -6,6 +6,7 @@ class Asset < ActiveRecord::Base
   has_many :results, :dependent => :destroy
   
   delegate :validators, :to => :content_type
+  delegate :user, :to => :site
 
   has_and_belongs_to_many :links,
     :class_name => "Asset",

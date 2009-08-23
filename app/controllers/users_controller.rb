@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_filter :require_user, :except => [:activate, :new, :create]
+  before_filter :require_owner, :except => [:activate, :new, :create, :index]
+  before_filter :require_admin, :only => :index
 
   make_resourceful do
     actions :all, :except => :create
@@ -39,5 +41,9 @@ class UsersController < ApplicationController
 
   def current_objects
     @current_object ||= current_model.paginate :page => params[:page]
+  end
+
+  def require_owner
+    access_denied unless current_user.admin? ||  current_user == current_object
   end
 end

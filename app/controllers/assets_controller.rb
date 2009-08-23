@@ -1,5 +1,6 @@
 class AssetsController < ApplicationController
-  before_filter :require_user, :except => [:index, :show]
+  before_filter :require_user
+  before_filter :require_owner
   
   make_resourceful do
     actions :all, :except => [:edit, :update]
@@ -29,5 +30,13 @@ class AssetsController < ApplicationController
 
   def current_objects
     @current_object ||= current_model.has_content_type.filter_by(params).paginate  :page => params[:page], :order => 'assets.external ASC, results.severity DESC', :include => :results
+  end
+
+  def require_owner
+    if parent_object
+      access_denied unless current_user.admin? || current_user == parent_object.user
+    else
+      access_denied unless current_user.admin? || current_user == current_object.user
+    end
   end
 end

@@ -1,5 +1,6 @@
 class SitesController < ApplicationController
   before_filter :require_user
+  before_filter :require_owner, :except => [:index, :create, :new]
   
   make_resourceful do
     actions :all
@@ -15,5 +16,9 @@ class SitesController < ApplicationController
 
   def current_objects
     @current_object ||= current_model.paginate  :page => params[:page], :include => :assets
+  end
+
+  def require_owner
+    access_denied unless current_user.admin? || current_user == current_object.user
   end
 end
