@@ -2,6 +2,8 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.resources :workers
     admin.resources :validators
+    admin.update_settings 'settings/update', :controller => 'settings', :action => 'update'
+    admin.settings 'settings', :controller => 'settings'
   end
 
   map.resources :sites, :shallow => true do |site|

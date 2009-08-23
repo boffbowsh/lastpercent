@@ -1,6 +1,6 @@
 class Spider
   def self.crawl( site )
-    anemone = Anemone.crawl( site.url ) do |core|
+    anemone = Anemone.crawl( site.url, :url_limit => Settings.url_limit ) do |core|
       core.on_every_page do |page|
         asset = site.assets.find_or_create_by_url( page.url.to_s )
         content_type = ContentType.find_or_create_by_mime_type( page.content_type )
