@@ -12,8 +12,15 @@
     - if asset.content_type
       = link_to asset.content_type.to_pretty_s, site_assets_path(:content_type_id => asset.content_type.id), :class => 'content_type'
       
-    = link_to "<em>#{asset.errors_count}</em>", asset_results_path(asset, :severity => severity(:error)), :class => 'errors', :title => "There are #{asset.errors_count} errors"
-    = link_to "<em>#{asset.warnings_count}</em>", asset_results_path(asset, :severity => severity(:warning)), :class => 'warnings', :title => "There are #{asset.warnings_count} errors"
-    = link_to "<em>#{asset.infos_count}</em>", asset_results_path(asset, :severity => severity(:info)), :class => 'infos', :title => "There are #{asset.infos_count} errors"
-    %span.success= asset.successes_count
-  
+    - if asset.errors_count > 0
+      = link_to "<em>#{asset.errors_count}</em>", asset_results_path(asset, :severity => severity(:error)), :class => 'errors', :title => "There are #{asset.errors_count} errors"
+      
+    - if asset.warnings_count > 0
+      = link_to "<em>#{asset.warnings_count}</em>", asset_results_path(asset, :severity => severity(:warning)), :class => 'warnings', :title => "There are #{asset.warnings_count} errors"
+      
+    - if asset.infos_count > 0
+      = link_to "<em>#{asset.infos_count}</em>", asset_results_path(asset, :severity => severity(:info)), :class => 'infos', :title => "There are #{asset.infos_count} errors"  
+      
+    - if asset.valid?
+      %span.success Valid
+    

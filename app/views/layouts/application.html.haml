@@ -47,7 +47,7 @@
       - if @content_for_content_top.present?
         #content_top
           = yield :content_top
-          = yield :breadcrumbs
+          #sub_menu= yield :breadcrumbs
       #content.clearfix
         - flash.each do |key, msg|
           %div{:class => "flash #{key}"}= msg

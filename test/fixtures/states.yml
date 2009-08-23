@@ -1,23 +1,29 @@
 worker-disabled:
+  id: 1
   name: disabled
   state_type: Worker
 
 worker-enabled:
+  id: 2
   name: enabled
   state_type: Worker
   
 check-pending:
+  id: 3
   name: pending
   state_type: Check
 
 check-running:
+  id: 4
   name: running
   state_type: Check
 
 check-completed:
+  id: 5
   name: completed
   state_type: Check
 
 check-failed:
+  id: 6
   name: failed
   state_type: Check
