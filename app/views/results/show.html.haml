@@ -1,3 +1,8 @@
-- breadcrumbs(link_to(@parent_object.class.to_s, sites_path), link_to(@parent_object, @parent_object), link_to('Results', polymorphic_path([@parent_object, Result.new])), @result)
+- # breadcrumbs(link_to(@parent_object.class.to_s, sites_path), link_to(@parent_object, @parent_object), "Results", @result)
 - content_for :content_top do
-  %h1= @result
+  %h1= @result.asset
+
+%p
+  = @result
+
+~ content_tag :pre, @result.asset.excerpt(6, 1)
