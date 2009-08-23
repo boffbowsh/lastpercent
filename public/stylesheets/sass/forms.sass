@@ -1,4 +1,8 @@
 form
+  .description
+    :font-size .8em
+    :color #B5B5B5
+    :margin 5px 0 0 0
   .label 
     +clearfix
     :margin-top 10px
@@ -8,7 +12,9 @@ form
       :font-weight bold
       :cursor pointer
       :float left
-      :padding 4px 8px 4px 0
+      :padding 4px 0
+    .star
+      :color #991311
     p.error
       :font-size .75em
       :color #b21313
@@ -16,6 +22,7 @@ form
       :float left
       :padding 4px 8px 4px 15px
       :max-width 300px
+      :margin 0
       :background #E2E2E2 url(../images/error_bg.png) left no-repeat
       :-moz-border-radius-topright 5px
       :-webkit-border-top-right-radius 5px
