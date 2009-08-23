@@ -52,8 +52,7 @@ module Anemone
         
         if response.nil? # The was no response from the server
           return Page.new(url)
-        elsif url.is_external? || !Page.html?( Page.content_type_sanitize( response.to_hash['content-type'] ) )
-          
+        elsif url.is_external?
           return Page.new(url, nil, code, response.to_hash, aka, response_time)
         else
           return Page.new(url, response.body, code, response.to_hash, aka, response_time)
@@ -166,7 +165,7 @@ module Anemone
     def not_found?
       404 == @code
     end
-     
+
     def self.content_type_sanitize( dirty_mime_type )
       return blank_type if dirty_mime_type.nil?
       

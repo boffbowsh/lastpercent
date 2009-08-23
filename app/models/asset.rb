@@ -112,10 +112,12 @@ class Asset < ActiveRecord::Base
   end
 
   def save_local_copy
-    filename = local_storage_filename
-    FileUtils.mkdir_p File.dirname(filename)
-    open(filename,'w') do |f|
-      f.write @body
+    if cache_data?
+      filename = local_storage_filename
+      FileUtils.mkdir_p File.dirname(filename)
+      open(filename,'w') do |f|
+        f.write @body
+      end
     end
   end
 
@@ -132,5 +134,10 @@ class Asset < ActiveRecord::Base
 
   def destroy_local_copy!
     File.unlink local_storage_filename
+  end
+
+  def cache_data?
+    cache_array = %w{ text/xml text/plain text/html text/css application/atom+xml application/rss+xml application/xml }
+    cache_array.include? self.mime_type
   end
 end
