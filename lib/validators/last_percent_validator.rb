@@ -1,6 +1,7 @@
 module LastPercentValidator
   class Base
-    attr_accessor :check, :validator, :results
+    attr_accessor :check, :validator
+    attr_reader :results
 
     SEVERITY = { :info => 0, :warning => 1, :error => 2 }
 

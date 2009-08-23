@@ -8,7 +8,18 @@ class Result < ActiveRecord::Base
   validates_presence_of :check_id
   validates_presence_of :asset_id
 
-  def to_s
-    message.body
+  delegate :body, :to => :message
+  delegate :validator_id, :to => :check
+
+  before_validation_on_create :set_asset_id
+
+  alias :to_s :body
+  
+  def body= val
+    write_attribute :message_id, Message.find_or_create_by_validator_id_and_body(validator_id, val).id
+  end
+  
+  def set_asset_id
+    write_attribute :asset_id, check.asset_id
   end
 end

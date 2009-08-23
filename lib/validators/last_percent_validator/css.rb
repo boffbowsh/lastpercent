@@ -1,10 +1,9 @@
 require 'w3c_validators'
-include W3CValidators
 
 class LastPercentValidator::CSS < LastPercentValidator::Base
     
   def run
-    @validator = CSSValidator.new
+    @validator = W3CValidators::CSSValidator.new
     
     #results = @validator.validate_file(fp)
     results = @validator.validate_text(@asset.body)

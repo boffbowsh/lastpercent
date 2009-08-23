@@ -14,4 +14,8 @@ class Validator < ActiveRecord::Base
   validates_uniqueness_of :permalink
 
   named_scope :active, :conditions => {:active => true}
+  
+  def validator_class
+    class_name.constantize
+  end
 end
