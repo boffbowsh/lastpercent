@@ -1,14 +1,14 @@
 - breadcrumbs('Sites')
 - content_for :content_top do
   %h1 Sites
-
-%p.intro= t('site.index.intro')
+  %p.intro= t('site.index.intro')
 
 - if @sites.any?
   %ul.list= render @sites
   = will_paginate @sites
-  %p= link_to "Check another site", new_site_path, :class => 'button'
+  %p= link_to t('site.navigation.add', :default => "Check a site"), new_site_path, :class => 'button'
 - else
   %p.empty
     You've not got any sites yet,
     = link_to "check a new site.", new_site_path, :class => 'button'
+
