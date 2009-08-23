@@ -127,7 +127,7 @@ module Anemone
           # TODO : Add support for https links
           # Only follow http links
           # Only fetch url_limit number on links
-          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s ) && ( Anemone.options.url_limit -= 1) > 0
+          link_queue.enq(link)  if URI::regexp(%w(http)).match( link.to_s ) && ( Anemone.options.url_limit && Anemone.options.url_limit -= 1) > 0
           @pages[link] = nil
         end
 
