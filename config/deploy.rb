@@ -114,5 +114,5 @@ namespace :sphinx do
   end
 end
 
-after "deploy:symlink", "deploy:update_crontab"
+#after "deploy:symlink", "deploy:update_crontab"
 after "deploy", "sphinx:rebuild"
