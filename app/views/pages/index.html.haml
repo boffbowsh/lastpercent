@@ -1,6 +1,17 @@
-%p Welcome to last percent
+#introduction
+  %h1= t('pages.home.title', :default => 'Welcome to Last Percent')
+  %p.intro= t('pages.home.intro')
+  
+  %h2= t('pages.home.screenshots.intro', :default => 'A few screenshots')
+  %ul
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
+    %li= link_to(image_tag('/images/screenshots/1_small.jpg', :alt => t('pages.home.screenshots.overview')), '/images/screenshots/1.jpg')
 
-%p
-  = link_to "Sign up", signup_path
-%p
-  = link_to "Login", login_path
+#search
+  = render 'sites/search'
+  %p.login
+    = t('page.home.login_small', :default => 'Already have an account?')
+    = link_to t('page.home.login_link', :default => 'Sign in'), login_path
+  
+  
