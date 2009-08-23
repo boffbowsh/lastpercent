@@ -1,14 +1,18 @@
 %li[asset]{:class => set_asset_class(asset)}
   %h3
     = link_to asset, asset, :title => asset.url
-    - if asset.external?
-      %abbr.external{:title => 'This is an external site'} (external)
+
     - if asset.slow?
       %abbr.slow{:title => 'This is appears to be a bit slow to load'} (slow)
     
     %span.speed= "(#{asset.response_time} ms)"
   
   %p.results
+    
+  
+    - if asset.external?
+      %abbr.external{:title => 'This is an external site'} external
+    
     - if asset.content_type
       = link_to asset.content_type.to_pretty_s, site_assets_path(:content_type_id => asset.content_type.id), :class => 'content_type'
       
@@ -20,6 +24,8 @@
       
     - if asset.infos_count > 0
       = link_to "<em>#{asset.infos_count}</em>", asset_results_path(asset, :severity => severity(:info)), :class => 'infos', :title => "There are #{asset.infos_count} errors"  
+    
+    = asset_response_code(asset)  
       
     - if asset.valid?
       %span.success Valid
