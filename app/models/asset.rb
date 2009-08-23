@@ -2,8 +2,8 @@ class Asset < ActiveRecord::Base
   # Associations
   belongs_to :site
   belongs_to :content_type
-  has_many :checks
-  has_many :results
+  has_many :checks, :dependent => :destroy
+  has_many :results, :dependent => :destroy
   
   delegate :validators, :to => :content_type
 

@@ -16,9 +16,7 @@ class User < ActiveRecord::Base
 
   is_paranoid
 
-  validates_presence_of :first_name
-
-  has_many :sites
+  has_many :sites, :dependent => :destroy
 
   def map_openid_registration(registration)
     self.email = registration["email"] if email.blank?
