@@ -5,7 +5,7 @@ class SitesController < ApplicationController
   make_resourceful do
     actions :all
 
-    publish :xml, :json, :attributes => [:id, :url, :assets_count, :errors_count, :warnings_count, :successes_count, {:user => [:id, :name]}]
+    publish :xml, :json, :attributes => [:id, :url, :spider_failed_at, :spider_ended_at, :assets_count, :errors_count, :warnings_count, :successes_count, {:user => [:id, :name]}]
   end
 
   private

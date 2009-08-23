@@ -6,7 +6,9 @@ class Spider
     
     site.update_attribute(:spider_started_at, Time.now)
     begin
-      anemone = Anemone.crawl( site.url, :url_limit => 10, :user_agent => user_agent ) do |core|
+      anemone = Anemone.crawl( site.url, :url_limit => Settings.url_limit, 
+                                         :time_limit => Settings.time_limit, 
+                                         :user_agent => user_agent ) do |core|
         core.focus_crawl do |page|
           page.links.each do |link|
             link.allowed = robot_txt.allowed? link.to_s
@@ -24,9 +26,8 @@ class Spider
                                :content_type_id => content_type.id,
                                :content_length => page.content_length,
                                :response_time => page.response_time }
-
-          asset.save!
-
+          asset.save
+          
           page.links.each do |link|
             child_asset = site.assets.find_or_create_by_url( link.to_s )
             # asset.links << child_asset unless asset.link_ids.include?( child_asset.id )
@@ -35,7 +36,7 @@ class Spider
       end
       site.update_attribute(:spider_ended_at, Time.now)
     rescue Exception => e
-      puts e
+      puts e.to_s
       site.update_attribute(:spider_failed_at, Time.now)
     end
   end
