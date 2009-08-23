@@ -2,6 +2,8 @@
 - content_for :content_top do
   %h1 Sites
 
+%p.intro= t('site.index.intro')
+
 %ul.list= render @sites
 = will_paginate @sites
 

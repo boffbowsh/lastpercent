@@ -16,21 +16,23 @@ en:
       overview: Overview
       errors: Errors
       warnings: Warnings
+    index: 
+      intro: 'This is a list of all the sites we have for you on the system. From here you can see an overview of the output that we have generated, and you can drill down into more detail'
   pages:
     home:
-      title: Welcome to Last Percent
-      intro: "Sanity checking for Web Apps.<br />Sanity saving for Project Managers."
+      title: Welcome to Last Percent!
+      intro: "Standards reign supreme on the web, you'll want to make sure your site abides by them!<br /><br />You can be scanning your site in seconds by inputting your URL, we'll go check that your HTML, CSS and XML/RSS/Atom feeds are valid, as well as tests for accessibility.<br /><br />From there we'll provide you with a clean interface for viewing the feedback so you can get onto making sure your site stays valid!"
       screenshots:
-        intro: A few screenshots 
+        intro: A few screenshots to moisen your codebuds...
         overview: This is a test screenshot
     login:
       title: Sign in or register
-      intro: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa."
+      intro: "Simply register or sign-in with OpenID to continue, or if your not into that whole new fangled malarky you can just register as usual using the form below!"
     about:
       title: About Last Percent
     contact:
       title: Contact Us
   forms:
     search:
-      label: Enter your website address
-      submit: Start
+      label: Enter your website address...
+      submit: Scan

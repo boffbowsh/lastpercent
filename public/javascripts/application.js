@@ -5,7 +5,7 @@ $(document).ready(function() {
   open_id_field.hide();
 
   $('form#new_user')
-    .prepend('<a href="#" id="open_id_login_toggle">Sign in with Open ID</a>')
+    .prepend('<a href="#" id="open_id_login_toggle">Register with Open ID</a>')
     .find('#open_id_login_toggle')
     .click(function() {
       
