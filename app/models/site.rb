@@ -11,9 +11,14 @@ class Site < ActiveRecord::Base
   validates_presence_of :user_id
   validates_associated :user
   # validates_presence_of :verification_token
+  validate :not_reached_site_limit
 
   def to_s
     name.blank? ? url : name
+  end
+
+  def not_reached_site_limit
+    errors.add('url', "Max site limit reached (during beta)") if user.sites.count >= Settings.max_site_limit
   end
 
   def assets_count
