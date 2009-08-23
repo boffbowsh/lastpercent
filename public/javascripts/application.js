@@ -1,15 +1,28 @@
 $(document).ready(function() {
-  var open_id_field = $('form#new_user #field_openid_identifier');
+  var open_id_register = $('form#new_user #field_openid_identifier');
+  var open_id_signup = $('form#new_user_session #field_openid_identifier');
 
   // Hide the open id field
-  open_id_field.hide();
+  open_id_register.hide();
+  open_id_signup.hide();
 
   $('form#new_user')
-    .prepend('<a href="#" id="open_id_login_toggle">Register with Open ID</a>')
+    .prepend('<a href="#" class="button" id="open_id_login_toggle">Register with Open ID</a>')
     .find('#open_id_login_toggle')
     .click(function() {
       
-    open_id_field.show();
+    $('form#new_user .fields').toggle();
+    open_id_register.toggle();
+    return false;
+  });
+  
+  $('form#new_user_session')
+    .prepend('<a href="#" class="button" id="open_id_login_toggle">Signup with Open ID</a>')
+    .find('#open_id_login_toggle')
+    .click(function() {
+     
+     $('form#new_user_session .fields').toggle(); 
+    open_id_signup.toggle();
     return false;
   });
 

@@ -23,12 +23,15 @@
 
   %ul.list.assets_list
     = render :partial => 'asset', :collection =>  @assets
-  = will_paginate @assets
+
   %p.note
     We also found
     = pluralize(@site.assets.has_no_content_type.count, 'other asset')
     but we've not checked it yet.
     = link_to "Why?", page_path('faq')
+
+  = will_paginate @assets
+
 - else
   %p.empty
     No assets could be found.

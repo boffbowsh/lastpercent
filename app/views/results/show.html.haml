@@ -5,7 +5,7 @@
 %p
   = @result
 
-~ content_tag :pre, @result.asset.excerpt(6, 1)
+~ content_tag :pre, @result.asset.excerpt(@result.line_no, @result.column_no)
 
 %h3
   Find out more
