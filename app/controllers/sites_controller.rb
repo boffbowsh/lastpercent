@@ -14,6 +14,6 @@ class SitesController < ApplicationController
   end
 
   def current_objects
-    @current_object ||= current_model.paginate  :page => params[:page]
+    @current_object ||= current_model.paginate  :page => params[:page], :include => :assets
   end
 end
