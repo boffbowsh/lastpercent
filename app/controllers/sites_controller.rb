@@ -6,6 +6,11 @@ class SitesController < ApplicationController
     actions :all
 
     publish :xml, :json, :attributes => [:id, :url, :spider_failed_at, :spider_ended_at, :assets_count, :errors_count, :warnings_count, :successes_count, {:user => [:id, :name]}]
+    
+    response_for :destroy do 
+      flash[:notice] = 'Site was successfully removed'
+      redirect_to sites_path
+    end
   end
 
   private
