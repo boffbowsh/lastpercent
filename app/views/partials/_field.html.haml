@@ -1,0 +1,14 @@
+%div{:id => div_id, :class => div_class}
+  .label
+    = label
+    - if error.present?
+      %p.error= error
+    
+  .input
+    = element
+    
+  - if help.present?
+    %p.help= help
+    
+  - if description.present?
+    %p.description= description
