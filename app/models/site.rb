@@ -3,9 +3,6 @@ class Site < ActiveRecord::Base
   belongs_to :user
   has_many :assets
   has_many :results, :through => :assets
-  has_many :info_reports, :through => :assets, :class_name => 'Report', :conditions => {:severity => 0}
-  has_many :warning_reports, :through => :assets, :class_name => 'Report', :conditions => {:severity => 1}
-  has_many :error_reports, :through => :assets, :class_name => 'Report', :conditions => {:severity => 2}
   has_many :content_types, :through => :assets, :uniq => true
 
   # Validations
