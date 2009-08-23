@@ -1,3 +1,6 @@
+require 'net/http'
+require 'uri'
+
 class Asset < ActiveRecord::Base
   # Associations
   belongs_to :site
@@ -177,5 +180,24 @@ class Asset < ActiveRecord::Base
   def cache_data?
     cache_array = %w{ text/xml text/plain text/html text/css application/atom+xml application/rss+xml application/xml }
     cache_array.include? self.mime_type
+  end
+  
+  def fetch!
+    destroy_local_copy!
+    uri = URI.parse url
+    res = nil
+    realtime = Benchmark.realtime do
+      res = Net::HTTP.start(uri.host, uri.port) {|http| http.get(uri.path)}
+    end
+    
+    content_type = ContentType.find_or_create_by_mime_type( res.content_type )
+    
+    self.attributes = { :body => res.body.to_s,
+                         :response_status => res.code,
+                         :content_type_id => content_type.id,
+                         :content_length => res.body.size,
+                         :response_time => realtime*1000 }
+    self.save
+    self.enqueue
   end
 end
