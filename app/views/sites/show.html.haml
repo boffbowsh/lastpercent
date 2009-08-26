@@ -1,8 +1,8 @@
 - javascript 'jquery.timer', 'site'
-- breadcrumbs(link_to('Sites', sites_path), truncate(@site.to_s, :length => 50))
+- breadcrumbs(link_to('Sites', sites_path), truncate(html_escape(@site.to_s), :length => 50))
 
 - content_for :content_top do
-  %h1= @site
+  %h1=h @site
   %ul#submenu
     %li.active= link_to t('site.navigation.overview'), site_path
     %li= link_to t('site.navigation.assets'), site_assets_path(@site)

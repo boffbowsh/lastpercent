@@ -19,5 +19,5 @@
   
   %ul
     - @latest.each do |site|
-      %li= link_to site.to_s, site.url
+      %li= link_to html_escape(site.url), site.url, :target => '_blank'
 
