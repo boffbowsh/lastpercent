@@ -10,4 +10,4 @@ set :local_shared_files, %w(config/database.yml db/sphinx config/staging.sphinx.
 server "dwayne.rawnet.local", :app, :web, :db, :primary => true
 
 # Target directory for the application on the web and app servers.
-set(:deploy_to) { File.join("", "home", "rails", application, stage.to_s) }
+set(:deploy_to) { File.join("", "home", "rails", application, rails_env.to_s) }
