@@ -13,7 +13,7 @@ set :user, "rails"
 set :keep_releases, 5
 set :scm_verbose, true
 set :deploy_via, :remote_cache
-set :repository, "git@github.com:railsrumble/rr09-team-70.git"
+set :repository, "git@github.com:rawnet/lastpercent.git"
 set :scm, :git
 
 on :start do
@@ -29,7 +29,7 @@ depend :remote, :gem, 'thoughtbot-paperclip',             ">0", :source => 'http
 depend :remote, :gem, 'newrelic_rpm',                     ">0"
 depend :remote, :gem, 'authlogic',                        ">0"
 depend :remote, :gem, 'haml',                             ">0"
-depend :remote, :gem, 'mislav-will_paginate',             ">0"
+depend :remote, :gem, 'mislav-will_paginate',             ">0", :source => 'http://gems.github.com'
 depend :remote, :gem, 'w3c_validators',                   ">0"
 depend :remote, :gem, 'mechanize',                        ">0"
 depend :remote, :gem, 'raakt',                            ">0"
