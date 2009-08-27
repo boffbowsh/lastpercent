@@ -1,4 +1,8 @@
 %li[site]{:class => cycle('odd', 'even')}
+  - if site.is_being_crawled?
+    %p.results_left
+      %span.gears Scanning...
+      
   %h3= link_to html_escape(site), site
   
   = link_to "Delete", site_path(site), :class => 'button', :method => :delete, :confirm => 'Are you sure you want to delete this site? All your results will be lost.'

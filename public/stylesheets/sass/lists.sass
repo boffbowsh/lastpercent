@@ -92,7 +92,25 @@
         &.success_codes
           :display none
         em
-          :font-style normal   
+          :font-style normal
+    p.results_left
+      :float left
+      :margin-top 2px
+      :margin-bottom 0px
+      :margin-right 4px
+      a, span, abbr
+        :background #fff
+        :background-position 5px center
+        :background-repeat no-repeat
+        :padding 4px 4px 4px 25px
+        :font-size .75em
+        :font-weight bold
+        +radius_corners(5px)
+        :text-decoration none
+        &.gears
+          :background-image url(../images/icons/hourglass.png)
+        em
+          :font-style normal
           
 .assets_list, .sites_list 
   h3
