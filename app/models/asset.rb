@@ -112,10 +112,6 @@ class Asset < ActiveRecord::Base
     File.join(RAILS_ROOT,'cached_assets',thousands.to_s.ljust(4,'0'),id.to_s.rjust(4,'0'))
   end
 
-  def body
-    @body ||= read_local_copy
-  end
-
   def excerpt(line_no = nil, column_no = nil, range = 10)
     return if line_no.nil?
     if body
@@ -147,6 +143,10 @@ class Asset < ActiveRecord::Base
       # excerpt.gsub("\n", "<br />\n")
       excerpt
     end
+  end
+
+  def body
+    @body ||= read_local_copy
   end
 
   def body= val
