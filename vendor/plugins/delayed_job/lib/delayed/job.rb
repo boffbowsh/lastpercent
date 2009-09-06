@@ -113,8 +113,6 @@ module Delayed
       end
     
       jobtype  = args[0] || object.class.to_s
-      logger.info jobtype.inspect
-      logger.info object.inspect
       priority = args[1] || 0
       run_at   = args[2]
 
