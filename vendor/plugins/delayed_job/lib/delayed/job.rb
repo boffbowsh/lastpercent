@@ -57,7 +57,13 @@ module Delayed
     end
 
     def payload_object=(object)
-      self['handler'] = object.to_yaml
+      if object.is_a? ActiveRecord::Base
+        new_object = object.class.new
+        new_object.id = object.id
+        self['handler'] = new_object.to_yaml
+      else
+        self['handler'] = object.to_yaml
+      end
     end
 
     # Reschedule the job in the future (when a job fails).
@@ -236,6 +242,11 @@ module Delayed
         end
         attempt_to_load(handler_class || handler.class)
         handler = YAML.load(source)
+      end
+
+      if handler.is_a?(ActiveRecord::Base) && handler.new_record? && handler.id.present?
+        # We don't have a full copy of the record yet because we only serialized the ID. Load from DB
+        handler.reload
       end
 
       return handler if handler.respond_to?(:perform)
