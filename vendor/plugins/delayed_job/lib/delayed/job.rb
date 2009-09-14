@@ -246,7 +246,7 @@ module Delayed
 
       if handler.is_a?(ActiveRecord::Base) && handler.new_record? && handler.id.present?
         # We don't have a full copy of the record yet because we only serialized the ID. Load from DB
-        handler.reload
+        handler = handler.class.find handler.id
       end
 
       return handler if handler.respond_to?(:perform)
