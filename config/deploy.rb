@@ -16,10 +16,6 @@ set :deploy_via, :remote_cache
 set :repository, "git@github.com:rawnet/lastpercent.git"
 set :scm, :git
 
-on :start do
-  `ssh-add`
-end
-
 depend :remote, :gem, 'capistrano-ext',                   ">0"
 depend :remote, :gem, 'chronic',                          ">0"
 depend :remote, :gem, 'javan-whenever',                   ">0", :source => 'http://gems.github.com'
