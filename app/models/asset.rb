@@ -24,10 +24,10 @@ class Asset < ActiveRecord::Base
 
   after_update :enqueue
 
-  after_save :save_local_copy
-  
   named_scope :has_content_type, :conditions => 'content_type_id IS NOT NULL'
   named_scope :has_no_content_type, :conditions => 'content_type_id IS NULL'
+  
+  has_attached_file :data
 
   def enqueue
     Delayed::Job.enqueue self, 'Check' unless content_type.blank?
@@ -40,6 +40,14 @@ class Asset < ActiveRecord::Base
   def mime_type
     content_type.try(:mime_type)
   end
+  alias :data_content_type :mime_type
+  
+  def mime_type= var
+    write_attribute(:content_type=, ContentType.find_or_create_by_mime_type( var ))
+  end
+  alias :data_content_type= :mime_type=
+  
+  alias_attribute :data_file_size, :content_length
 
   def create_checks
     if checkable?
@@ -107,11 +115,6 @@ class Asset < ActiveRecord::Base
     has :created_at, :external, :response_status, :response_time
   end
 
-  def local_storage_filename
-    thousands = (id/1000).to_i * 1000
-    File.join(RAILS_ROOT,'cached_assets',thousands.to_s.ljust(4,'0'),id.to_s.rjust(4,'0'))
-  end
-
   def excerpt(line_no = nil, column_no = nil, range = 10)
     return if line_no.nil?
     if body
@@ -145,42 +148,9 @@ class Asset < ActiveRecord::Base
     end
   end
 
-  def body
-    @body ||= read_local_copy
-  end
-
-  def body= val
-    @body = val
-  end
-
-  def save_local_copy
-    if cache_data?
-      filename = local_storage_filename
-      FileUtils.mkdir_p File.dirname(filename)
-      open(filename,'w') do |f|
-        f.write @body
-      end
-    end
-  end
-
-  def read_local_copy
-    filename = local_storage_filename
-    if File.exists? filename
-      open(filename,'r') do |f|
-        @body = f.read
-      end
-    else
-      @body = nil
-    end
-  end
-
-  def destroy_local_copy!
-    File.unlink local_storage_filename if File.exist? local_storage_filename
-  end
-
+  CACHE_ARRAY = %w{ text/xml text/plain text/html text/css application/atom+xml application/rss+xml application/xml }
   def cache_data?
-    cache_array = %w{ text/xml text/plain text/html text/css application/atom+xml application/rss+xml application/xml }
-    cache_array.include? self.mime_type
+    CACHE_ARRAY.include? self.mime_type
   end
   
   def fetch!
@@ -200,5 +170,17 @@ class Asset < ActiveRecord::Base
                          :response_time => realtime*1000 }
     self.save
     self.enqueue
+  end
+  
+end
+
+require 'open-uri'
+class Paperclip::Attachment
+  def body
+    uri = URI.parse self.url
+    if uri.is_a? URI::Generic
+      uri = File.join RAILS_ROOT, 'public', uri.to_s.gsub(/\?.*$/, '')
+    end
+    open(uri).read
   end
 end
