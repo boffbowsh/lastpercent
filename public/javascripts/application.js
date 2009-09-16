@@ -38,4 +38,31 @@ $(document).ready(function() {
     frameWidth: 600,
     frameHeight: 400
   });
+  
+  $('#excerpt').excerpt('/system/datas/152915/original/http_www.neocol.com_?1253135364', 20, 6, 10);
 });
+
+$.fn.extend({
+  excerpt: function( url, line, column, range ){
+    $.get( url, function(data){
+      lines = data.split('\n');
+      padding = lines.length.toString().length + 1;
+      numbered_lines = $.map( lines, function(n,i) {
+        i += 1;
+        return Array(padding - i.toString().length).join('0') + i.toString() + ': ' + n;
+      });
+      start = line - range;
+      if (start < 0) { start = 0 }
+      end = line + range;
+      console.log([start, end].join(','))
+      sliced_lines = numbered_lines.slice(start, end)
+      this.text(sliced_lines.join('\n'));
+    }.bind(this));
+  }
+});
+
+// Make 'this' available within ajax calls
+Function.prototype.bind = function(thisArg){
+  var self = this;
+  return function() { self.apply(thisArg, arguments); };
+};
