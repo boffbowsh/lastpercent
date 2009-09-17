@@ -39,25 +39,67 @@ $(document).ready(function() {
     frameHeight: 400
   });
   
-  $('#excerpt').excerpt('/system/datas/152915/original/http_www.neocol.com_?1253135364', 20, 6, 10);
+  $.excerpt();
+  $.content_source();
 });
 
-$.fn.extend({
-  excerpt: function( url, line, column, range ){
-    $.get( url, function(data){
-      lines = data.split('\n');
-      padding = lines.length.toString().length + 1;
-      numbered_lines = $.map( lines, function(n,i) {
-        i += 1;
-        return Array(padding - i.toString().length).join('0') + i.toString() + ': ' + n;
-      });
-      start = line - range;
-      if (start < 0) { start = 0 }
-      end = line + range;
-      console.log([start, end].join(','))
-      sliced_lines = numbered_lines.slice(start, end)
-      this.text(sliced_lines.join('\n'));
-    }.bind(this));
+$.extend({
+  content_source: function() {
+    $('pre[data-content-url]').each( function()
+    {
+      console.log(this);
+      url = this.attr('data-content-url');
+      $.get( url, function(data){
+        lines = data.split('\n');
+        padding = lines.length.toString().length + 1;
+        numbered_lines = $.map( lines, function(n,i) {
+          i += 1;
+          gutter = Array(padding - i.toString().length).join(' ') + i.toString() + ': ';
+          return gutter + n;
+        });
+        this.text(numbered_lines.join('\n'));
+      }.bind(this) );
+    });
+  },
+  
+  excerpt: function() {
+    $('pre[data-excerpt-line]').each( function()
+    {
+      url = $(this).attr('data-excerpt-url');
+      line = parseInt($(this).attr('data-excerpt-line'));
+      column = parseInt($(this).attr('data-excerpt-column'));
+      range = parseInt($(this).attr('data-excerpt-range'));
+      if ( isNaN(range) ) { range = 10 }
+      $.get( url, function(data){
+        lines = data.split('\n');
+        padding = lines.length.toString().length + 1;
+        numbered_lines = $.map( lines, function(n,i) {
+          i += 1;
+          gutter = Array(padding - i.toString().length).join(' ') + i.toString() + ': ';
+          if ( i == line ) {
+            new_n = n.slice(0,column-1);
+            new_n += '$$BEGINCOLSPAN$$' + n.slice(column-1, column) + '$$ENDCOLSPAN$$';
+            new_n += n.slice(column,n.length);
+            return gutter + '$$BEGINLINESPAN$$' + new_n + '$$ENDLINESPAN$$';
+          }
+          else {
+            return gutter + n;
+          }
+        });
+        start = line - range - 1;
+        if (start < 0) { start = 0 }
+        end = line + range;
+        console.log(range);
+        sliced_lines = numbered_lines.slice(start, end);
+        $(this).text(sliced_lines.join('\n'));
+        html = $(this).html();
+        html = html.replace('$$BEGINCOLSPAN$$', '<span class="current_column">');
+        html = html.replace('$$BEGINLINESPAN$$', '<span class="current_line">');
+        html = html.replace('$$ENDCOLSPAN$$', '</span>');
+        html = html.replace('$$ENDLINESPAN$$', '</span>');
+        $(this).html(html);
+      }.bind(this));
+    });
   }
 });
 
