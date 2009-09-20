@@ -65,4 +65,15 @@ module ApplicationHelper
   def split_digits(value)
     content_tag :span, value
   end
+  
+  def asset_content_tag asset
+    content_tag :pre, '', :'data-content-url' =>  asset.data.url
+  end
+  
+  def result_content_tag result
+    content_tag :pre, '', 
+      :'data-excerpt-url' =>  result.asset.data.url, 
+      :'data-excerpt-line' => result.line_no,
+      :'data-excerpt-column' => result.column_no
+  end
 end

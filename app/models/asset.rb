@@ -33,17 +33,13 @@ class Asset < ActiveRecord::Base
     Delayed::Job.enqueue self, 'Check' unless content_type.blank?
   end
   
-  def content_type_id= val
-    write_attribute(:content_type_id, val)
-  end
-  
   def mime_type
     content_type.try(:mime_type)
   end
   alias :data_content_type :mime_type
   
   def mime_type= var
-    write_attribute(:content_type=, ContentType.find_or_create_by_mime_type( var ))
+    write_attribute(:content_type_id, ContentType.find_or_create_by_mime_type( var ).id)
   end
   alias :data_content_type= :mime_type=
   
@@ -174,6 +170,10 @@ class Asset < ActiveRecord::Base
 
   def body_present?
     !self.data.url.blank?
+  end
+  
+  def body
+    data.body if body_present?
   end
 end
 

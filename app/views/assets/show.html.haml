@@ -18,6 +18,6 @@
     %em= link_to split_digits(@asset.infos_count), asset_results_path(@asset, :severity => 0)
     .bar
 
-%br
-%h3 Content
-%pre{:'data-excerpt-url' => @asset.data.url, :'data-excerpt-line' => 11, :'data-excerpt-column' => 7}
+- if @asset.body_present?
+  %h3 Content
+  = asset_content_tag @asset

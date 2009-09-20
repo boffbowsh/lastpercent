@@ -48,7 +48,7 @@ $.extend({
     $('pre[data-content-url]').each( function()
     {
       console.log(this);
-      url = this.attr('data-content-url');
+      url = $(this).attr('data-content-url');
       $.get( url, function(data){
         lines = data.split('\n');
         padding = lines.length.toString().length + 1;
@@ -57,7 +57,7 @@ $.extend({
           gutter = Array(padding - i.toString().length).join(' ') + i.toString() + ': ';
           return gutter + n;
         });
-        this.text(numbered_lines.join('\n'));
+        $(this).text(numbered_lines.join('\n'));
       }.bind(this) );
     });
   },

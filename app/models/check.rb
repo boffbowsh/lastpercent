@@ -25,7 +25,7 @@ class Check < ActiveRecord::Base
   after_create :enqueue
   
   def enqueue
-    Delayed::Job.enqueue self
+    Delayed::Job.enqueue self, 'Check'
   end
   
   def perform
