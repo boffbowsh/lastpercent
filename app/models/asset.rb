@@ -103,7 +103,7 @@ class Asset < ActiveRecord::Base
     results.infos.count
   end
   
-  def valid?
+  def passed_validation?
     infos_count == 0 and warnings_count == 0 and errors_count == 0 and not /^[4|5|3]/.match(response_status.to_s)
   end
 
@@ -171,7 +171,10 @@ class Asset < ActiveRecord::Base
     self.save
     self.enqueue
   end
-  
+
+  def body_present?
+    !self.data.url.blank?
+  end
 end
 
 require 'open-uri'
